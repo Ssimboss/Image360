@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "Andrew Simvolokov" => "ssimboss@gmail.com" }
   s.social_media_url   = "https://vk.com/simbos"
-  s.platform     = :ios
+  s.ios.deployment_target = '8.0'
   s.source       = { :git => "https://github.com/Ssimboss/Image360.git", :tag => s.version }
   s.source_files  = "Image360/**/*.swift"
   s.resources = "Image360/**/*.{jpg, glsl}"
