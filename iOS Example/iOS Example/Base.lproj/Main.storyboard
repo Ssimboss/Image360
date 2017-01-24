@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fwC-J8-UHB">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="SdC-pQ-qva">
+            <objects>
+                <navigationController id="fwC-J8-UHB" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zaO-f6-fmk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="XYS-cV-kOs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wbi-YQ-9F9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-706" y="38"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="iOS_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yji-c7-R8Z">
+                                <rect key="frame" x="0.0" y="146.5" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Yji-c7-R8Z" secondAttribute="height" multiplier="1:1" id="d7V-qF-TZT"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="Gwc-ll-8zK" kind="embed" identifier="image360" id="RlR-0P-Ndk"/>
+                                </connections>
+                            </containerView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="YC3-37-IGX">
+                                <rect key="frame" x="15" y="624" width="345" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="7qV-9q-RmY"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Picture 1"/>
+                                    <segment title="Picture 2"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="AWl-Xn-c0U"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Yji-c7-R8Z" secondAttribute="trailing" id="0QD-sb-Kof"/>
+                            <constraint firstItem="Yji-c7-R8Z" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="0wy-h4-Qes"/>
+                            <constraint firstItem="Yji-c7-R8Z" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Cgg-Vc-RrF"/>
+                            <constraint firstAttribute="trailing" secondItem="YC3-37-IGX" secondAttribute="trailing" constant="15" id="KuJ-vA-WIZ"/>
+                            <constraint firstItem="YC3-37-IGX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="hFS-jH-FCe"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YC3-37-IGX" secondAttribute="bottom" constant="15" id="hKK-fR-Upr"/>
+                            <constraint firstItem="Yji-c7-R8Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pmY-EF-dkr"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="i9h-41-opd">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="rTX-XT-oXE">
+                            <connections>
+                                <segue destination="85w-Ka-FdT" kind="show" identifier="settings" id="1ll-4p-U3J"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="pictureSegmentedControl" destination="YC3-37-IGX" id="Q0Z-7e-ysL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="Q6w-wh-sZr">
+            <objects>
+                <viewController id="85w-Ka-FdT" customClass="SettingsController" customModule="iOS_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1dI-PS-myh"/>
+                        <viewControllerLayoutGuide type="bottom" id="5PM-mF-l09"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iSj-WF-740">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inertia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HP9-ey-gzb">
+                                <rect key="frame" x="15" y="79" width="48.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VXe-al-3SO">
+                                <rect key="frame" x="15" y="108" width="345" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="j6k-4c-h6Q"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="None"/>
+                                    <segment title="Short"/>
+                                    <segment title="Long"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentChangedWithSender:" destination="85w-Ka-FdT" eventType="valueChanged" id="hOx-fQ-raL"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="VXe-al-3SO" secondAttribute="trailing" constant="15" id="JxG-Ik-pXq"/>
+                            <constraint firstItem="HP9-ey-gzb" firstAttribute="top" secondItem="1dI-PS-myh" secondAttribute="bottom" constant="15" id="Tha-se-1Pg"/>
+                            <constraint firstItem="HP9-ey-gzb" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="Xky-K8-AEu"/>
+                            <constraint firstItem="VXe-al-3SO" firstAttribute="top" secondItem="HP9-ey-gzb" secondAttribute="bottom" constant="8" id="hSj-ub-obT"/>
+                            <constraint firstItem="VXe-al-3SO" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="zNx-ZY-bz8"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Settings" id="5En-Ud-hjT">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="xct-j8-a1z">
+                            <connections>
+                                <segue destination="hpC-px-dke" kind="unwind" unwindAction="unwindToViewControllerWithSegue:" id="BpX-9F-TUY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="inertiaSegmentedControl" destination="VXe-al-3SO" id="sM3-Fq-GU6"/>
+                        <outlet property="saveButton" destination="xct-j8-a1z" id="HxL-4R-P7d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jmy-pk-rxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="hpC-px-dke" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="860" y="-423"/>
+        </scene>
+        <!--GLKit View Controller-->
+        <scene sceneID="UkA-u8-ESm">
+            <objects>
+                <glkViewController preferredFramesPerSecond="30" id="Gwc-ll-8zK" customClass="Image360Controller" customModule="Image360" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Abs-2K-6Sp"/>
+                        <viewControllerLayoutGuide type="bottom" id="SB4-WD-P7l"/>
+                    </layoutGuides>
+                    <glkView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" enableSetNeedsDisplay="NO" id="dAx-eA-MLY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <connections>
+                            <outlet property="delegate" destination="Gwc-ll-8zK" id="k38-5Z-jv0"/>
+                        </connections>
+                    </glkView>
+                </glkViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hsC-0B-oJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="904" y="139"/>
+        </scene>
+    </scenes>
+</document>
