@@ -2,7 +2,7 @@
 
 Greetings.
 
-Image360 is a simple stack of Image360Controller + Image360View which allows you to display 360° images
+Image360 is a simple stack of Image360Controller + Image360View which allows you to display 360° panoramic images.
 
 ## How to use it?
 - Create an instance of `Image360Controller` in your code.
@@ -29,7 +29,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-pod 'Image360', '~> 0.1.0'
+pod 'Image360', '~> 0.1.1'
 end
 ```
 
