@@ -1,3 +1,5 @@
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Image360.svg)](https://img.shields.io/cocoapods/v/Image360.svg)
+
 # What is this?
 
 Greetings.
