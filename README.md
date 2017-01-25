@@ -1,10 +1,11 @@
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Image360.svg)](https://img.shields.io/cocoapods/v/Image360.svg)
 
+
 # What is this?
 
-Greetings.
-
 Image360 is a simple stack of Image360Controller + Image360View which allows you to display 360° panoramic images.
+ 
+![alt tag](https://raw.githubusercontent.com/Ssimboss/Image360/master/example.gif)
 
 ## How to use it?
 - Create an instance of `Image360Controller` in your code.
