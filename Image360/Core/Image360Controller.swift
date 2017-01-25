@@ -30,8 +30,8 @@ private let blackFileURL = Bundle(for: Image360Controller.self).url(forResource:
 /// ## Image360Controller
 /// This controller presentes a special view to dysplay 360° panoramic image.
 public class Image360Controller: GLKViewController {
-
-    private var imageView: Image360View
+    /// Image 360 view which actually dysplays 360° panoramic image.
+    public var imageView: Image360View
 
     // MARK: Inertia
     private let inertiaInterval: TimeInterval = 0.020

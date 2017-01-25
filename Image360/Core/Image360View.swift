@@ -32,6 +32,18 @@ protocol Image360ViewTouchesHandler: class {
     func image360View(_ view: Image360View, touchesEnded touches: Set<UITouch>, with event: UIEvent?)
 }
 
+/// ## Image360ViewObserver
+/// The `Image360ViewObserver` protocol defines methods that you use to manage
+/// reactions to changes of basic fields of `Image360View`.
+public protocol Image360ViewObserver: class {
+    /// Sent when new value of `rotationAngleXZ` was set.
+    func image360View(_ view: Image360View, didRotateOverXZ rotationAngleXZ: Float)
+    /// Sent when new value of `rotationAngleY` was set.
+    func image360View(_ view: Image360View, didRotateOverY rotationAngleY: Float)
+    /// Sent when new value of `cameraFovDegree` was set.
+    func image360View(_ view: Image360View, didChangeFOV cameraFov: Float)
+}
+
 /// ## Image360View
 /// This view presentes a special view to dysplay 360° panoramic image.
 /// 
@@ -75,11 +87,15 @@ public class Image360View: GLKView {
 
     /// Camera "Field Of View". Degrees. Readonly.
     /// Use `setCameraFovDegree(newValue:)` to change this value.
-    public private(set) var cameraFovDegree: Float = 45.0
+    public private(set) var cameraFovDegree: Float = 45.0 {
+        didSet {
+            observer?.image360View(self, didChangeFOV: cameraFovDegree)
+        }
+    }
     /// Sets new value to `cameraFovDegree`
     /// - parameter newValue: New value of `cameraFovDegree` to be set.
     /// Could be ignored/changed in case it's out of range 30 .. 100
-    func setCameraFovDegree(newValue: Float) {
+    public func setCameraFovDegree(newValue: Float) {
         if newValue > cameraFOVDegreeMax {
             cameraFovDegree = cameraFOVDegreeMax
         } else if newValue < cameraFOVDegreeMin {
@@ -90,8 +106,10 @@ public class Image360View: GLKView {
     }
     /// Deafult(init) value of `cameraFovDegree`
     public let cameraFovDegreeDefault: Float = 45.0
-    private let cameraFOVDegreeMin: Float = 30.0
-    private let cameraFOVDegreeMax: Float = 100.0
+    /// Minimum possible value of `cameraFovDegree`
+    public let cameraFOVDegreeMin: Float = 30.0
+    /// Maximum possible value of `cameraFovDegree`
+    public let cameraFOVDegreeMax: Float = 100.0
 
     private let zNear: Float = 0.1
     private let zFar: Float = 100.0
@@ -99,15 +117,35 @@ public class Image360View: GLKView {
     // MARK: Rotation
     /// Rotation angle relative to XZ-plane. Radians. Readonly.
     /// Use `setRotationAngleXZ(newValue:)` to change this value.
-    public private(set) var rotationAngleXZ: Float = 0.0
+    public private(set) var rotationAngleXZ: Float = 0.0 {
+        didSet {
+            observer?.image360View(self, didRotateOverXZ: rotationAngleXZ)
+        }
+    }
     /// Sets new value to `rotationAngleXZ`
     /// - parameter newValue: New value of `rotationAngleXZ` to be set.
+    /// Could be ignored/changed in case it's out of range -π .. π
     public func setRotationAngleXZ(newValue: Float) {
-        rotationAngleXZ = newValue
+        if newValue > rotationAngleXZMax {
+            rotationAngleXZ = fmod(newValue, 2 * Float(M_PI)) - 2 * Float(M_PI)
+        } else if newValue < rotationAngleXZMin {
+            rotationAngleXZ = fmod(newValue, 2 * Float(M_PI)) + 2 * Float(M_PI)
+        } else {
+            rotationAngleXZ = newValue
+        }
     }
+    /// Minimum possible value of `rotationAngleXZ`
+    public let rotationAngleXZMax = Float(M_PI)
+    /// Maximum possible value of `rotationAngleXZ`
+    public let rotationAngleXZMin = -Float(M_PI)
+
     /// Rotation angle relative to Y-axis. Radians. Readonly.
     /// Use `setRotationAngleY(newValue:)` to change this value.
-    public private(set) var rotationAngleY: Float = 0.0
+    public private(set) var rotationAngleY: Float = 0.0 {
+        didSet {
+            observer?.image360View(self, didRotateOverY: rotationAngleY)
+        }
+    }
     /// Sets new value to `rotationAngleY`
     /// - parameter newValue: New value of `rotationAngleY` to be set.
     /// Could be ignored/changed in case it's out of range -π/2 .. π/2
@@ -120,11 +158,13 @@ public class Image360View: GLKView {
             rotationAngleY = newValue
         }
     }
-
-    private let rotationAngleYMax = Float(M_PI_2)
-    private let rotationAngleYMin = -Float(M_PI_2)
+    /// Minimum possible value of `rotationAngleY`
+    public let rotationAngleYMax = Float(M_PI_2)
+    /// Maximum possible value of `rotationAngleY`
+    public let rotationAngleYMin = -Float(M_PI_2)
 
     weak var touchesHandler: Image360ViewTouchesHandler?
+    public weak var observer: Image360ViewObserver?
 
     // MARK: Init
     override init(frame: CGRect) {

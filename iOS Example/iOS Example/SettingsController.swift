@@ -28,12 +28,15 @@ import Image360
 class SettingsController: UIViewController {
 
     @IBOutlet var inertiaSegmentedControl: UISegmentedControl!
+    @IBOutlet var pictureSegmentedControl: UISegmentedControl!
 
     @IBOutlet var saveButton: UIBarButtonItem!
 
     var inertia: Inertia = .none
+    var pictureIndex: Int = 0
 
     private var initInertia: Inertia!
+    private var initPictureIndex: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +51,11 @@ class SettingsController: UIViewController {
         }
 
         initInertia = inertia
+        initPictureIndex = pictureIndex
+        pictureSegmentedControl.selectedSegmentIndex = pictureIndex
     }
 
-    @IBAction func segmentChanged(sender: UISegmentedControl) {
+    @IBAction func inertiaSegmentChanged(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0: inertia = .none
         case 1: inertia = .short
@@ -58,6 +63,21 @@ class SettingsController: UIViewController {
         default:
             assertionFailure("Unexpected selected segment index")
         }
-        saveButton.isEnabled = inertia != initInertia
+        saveButton.isEnabled = valuesChanged
+    }
+
+    @IBAction func pictureSegmentChanged(sender: UISegmentedControl) {
+        pictureIndex = sender.selectedSegmentIndex
+        saveButton.isEnabled = valuesChanged
+    }
+
+    private var valuesChanged: Bool {
+        if inertia != initInertia {
+            return true
+        } else if pictureIndex != initPictureIndex {
+            return true
+        } else {
+            return false
+        }
     }
 }

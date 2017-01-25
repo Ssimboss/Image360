@@ -39,7 +39,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yji-c7-R8Z">
-                                <rect key="frame" x="0.0" y="146.5" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="79" width="375" height="375"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Yji-c7-R8Z" secondAttribute="height" multiplier="1:1" id="d7V-qF-TZT"/>
                                 </constraints>
@@ -60,16 +60,43 @@
                                     <action selector="segmentChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="AWl-Xn-c0U"/>
                                 </connections>
                             </segmentedControl>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fdc-QQ-pPR">
+                                <rect key="frame" x="13" y="469" width="349" height="31"/>
+                                <connections>
+                                    <action selector="angleXZSliderChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="ma6-fJ-ZlF"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="CoF-Km-VaZ">
+                                <rect key="frame" x="13" y="506.5" width="349" height="31"/>
+                                <connections>
+                                    <action selector="angleYSliderChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="gah-Bx-Gav"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.21428570999999999" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="rea-x1-3cz">
+                                <rect key="frame" x="13" y="544.5" width="349" height="31"/>
+                                <connections>
+                                    <action selector="fovSliderChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="zNN-Sc-HED"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Yji-c7-R8Z" secondAttribute="trailing" id="0QD-sb-Kof"/>
                             <constraint firstItem="Yji-c7-R8Z" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="0wy-h4-Qes"/>
-                            <constraint firstItem="Yji-c7-R8Z" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Cgg-Vc-RrF"/>
+                            <constraint firstItem="CoF-Km-VaZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="AcX-xF-0lS"/>
+                            <constraint firstAttribute="trailing" secondItem="rea-x1-3cz" secondAttribute="trailing" constant="15" id="FZ5-KI-RaE"/>
+                            <constraint firstAttribute="trailing" secondItem="CoF-Km-VaZ" secondAttribute="trailing" constant="15" id="Kkk-W9-Zg8"/>
                             <constraint firstAttribute="trailing" secondItem="YC3-37-IGX" secondAttribute="trailing" constant="15" id="KuJ-vA-WIZ"/>
+                            <constraint firstItem="fdc-QQ-pPR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="a2t-Gz-zOf"/>
+                            <constraint firstItem="rea-x1-3cz" firstAttribute="top" secondItem="CoF-Km-VaZ" secondAttribute="bottom" constant="8" id="bxZ-Sw-ahs"/>
+                            <constraint firstItem="Yji-c7-R8Z" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="15" id="dt1-Do-MfQ"/>
                             <constraint firstItem="YC3-37-IGX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="hFS-jH-FCe"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YC3-37-IGX" secondAttribute="bottom" constant="15" id="hKK-fR-Upr"/>
+                            <constraint firstItem="fdc-QQ-pPR" firstAttribute="top" secondItem="Yji-c7-R8Z" secondAttribute="bottom" constant="15" id="jdk-au-k0a"/>
+                            <constraint firstAttribute="trailing" secondItem="fdc-QQ-pPR" secondAttribute="trailing" constant="15" id="ocG-LV-ee8"/>
                             <constraint firstItem="Yji-c7-R8Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pmY-EF-dkr"/>
+                            <constraint firstItem="CoF-Km-VaZ" firstAttribute="top" secondItem="fdc-QQ-pPR" secondAttribute="bottom" constant="8" id="scb-P9-fiR"/>
+                            <constraint firstItem="rea-x1-3cz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="uWz-bk-jwu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="i9h-41-opd">
@@ -80,6 +107,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="angleXZSlider" destination="fdc-QQ-pPR" id="Aa7-CX-ssl"/>
+                        <outlet property="angleYSlider" destination="CoF-Km-VaZ" id="PET-oa-iWj"/>
+                        <outlet property="fovSlider" destination="rea-x1-3cz" id="uBm-1d-SQS"/>
                         <outlet property="pictureSegmentedControl" destination="YC3-37-IGX" id="Q0Z-7e-ysL"/>
                     </connections>
                 </viewController>
@@ -116,16 +146,37 @@
                                     <segment title="Long"/>
                                 </segments>
                                 <connections>
-                                    <action selector="segmentChangedWithSender:" destination="85w-Ka-FdT" eventType="valueChanged" id="hOx-fQ-raL"/>
+                                    <action selector="inertiaSegmentChangedWithSender:" destination="85w-Ka-FdT" eventType="valueChanged" id="arr-Pw-k0X"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNT-fq-ATj">
+                                <rect key="frame" x="15" y="151" width="54" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="SRE-XU-C6M">
+                                <rect key="frame" x="15" y="180" width="345" height="29"/>
+                                <segments>
+                                    <segment title="Picture 1"/>
+                                    <segment title="Picture 2"/>
+                                </segments>
+                                <connections>
+                                    <action selector="pictureSegmentChangedWithSender:" destination="85w-Ka-FdT" eventType="valueChanged" id="i1A-W5-OqX"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="TNT-fq-ATj" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="COK-PJ-Gm2"/>
+                            <constraint firstItem="SRE-XU-C6M" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="Il1-v4-lde"/>
+                            <constraint firstItem="SRE-XU-C6M" firstAttribute="top" secondItem="TNT-fq-ATj" secondAttribute="bottom" constant="8" id="IyN-6X-7T8"/>
                             <constraint firstAttribute="trailing" secondItem="VXe-al-3SO" secondAttribute="trailing" constant="15" id="JxG-Ik-pXq"/>
                             <constraint firstItem="HP9-ey-gzb" firstAttribute="top" secondItem="1dI-PS-myh" secondAttribute="bottom" constant="15" id="Tha-se-1Pg"/>
                             <constraint firstItem="HP9-ey-gzb" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="Xky-K8-AEu"/>
                             <constraint firstItem="VXe-al-3SO" firstAttribute="top" secondItem="HP9-ey-gzb" secondAttribute="bottom" constant="8" id="hSj-ub-obT"/>
+                            <constraint firstItem="TNT-fq-ATj" firstAttribute="top" secondItem="VXe-al-3SO" secondAttribute="bottom" constant="15" id="k7Z-El-RLZ"/>
+                            <constraint firstAttribute="trailing" secondItem="SRE-XU-C6M" secondAttribute="trailing" constant="15" id="nGM-nz-Rgo"/>
                             <constraint firstItem="VXe-al-3SO" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="zNx-ZY-bz8"/>
                         </constraints>
                     </view>
@@ -140,13 +191,14 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="inertiaSegmentedControl" destination="VXe-al-3SO" id="sM3-Fq-GU6"/>
+                        <outlet property="pictureSegmentedControl" destination="SRE-XU-C6M" id="rqI-DP-u12"/>
                         <outlet property="saveButton" destination="xct-j8-a1z" id="HxL-4R-P7d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmy-pk-rxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hpC-px-dke" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="860" y="-423"/>
+            <point key="canvasLocation" x="860" y="-423.23838080959524"/>
         </scene>
         <!--GLKit View Controller-->
         <scene sceneID="UkA-u8-ESm">
