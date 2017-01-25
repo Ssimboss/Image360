@@ -24,8 +24,7 @@ Image360 is a simple stack of Image360Controller + Image360View which allows you
    switch identifier {
      case "image360":
        if let destination = segue.destination as? Image360Controller {
-         self.image360Controller = destination
-         self.image360Controller.imageView.observer = self
+         self.image360Controller.imageView.image = UIImage(named: "MyPanoramicImage")
        }
      default:
        ()
