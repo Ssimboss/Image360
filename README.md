@@ -54,7 +54,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-pod 'Image360', '~> 0.1.2'
+pod 'Image360', '~> 0.1.3'
 end
 ```
 
