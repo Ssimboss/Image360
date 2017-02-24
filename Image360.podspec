@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Image360"
-  s.version      = "0.1.3"
+  s.version      = "0.1.4"
   s.summary      = "Special controls to display 360° panoramic images."
   s.homepage     = "https://github.com/Ssimboss/Image360"
   s.license      = { :type => "MIT", :file => "LICENSE" }

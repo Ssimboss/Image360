@@ -16,6 +16,9 @@
 		200F86A41E227739008DF555 /* Image360View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F86A31E227739008DF555 /* Image360View.swift */; };
 		200F86A61E227760008DF555 /* Image360Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F86A51E227760008DF555 /* Image360Controller.swift */; };
 		20424EC11E243914008CD371 /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20424EC01E243914008CD371 /* Shader.swift */; };
+		417DDB021E604D6E00375BF1 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 417DDB011E604D6E00375BF1 /* README.md */; };
+		417DDB041E604DB700375BF1 /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = 417DDB031E604DB700375BF1 /* CHANGELOG.md */; };
+		417DDB061E604DED00375BF1 /* Image360.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 417DDB051E604DED00375BF1 /* Image360.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		200F86A31E227739008DF555 /* Image360View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image360View.swift; sourceTree = "<group>"; };
 		200F86A51E227760008DF555 /* Image360Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image360Controller.swift; sourceTree = "<group>"; };
 		20424EC01E243914008CD371 /* Shader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
+		417DDB011E604D6E00375BF1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		417DDB031E604DB700375BF1 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = SOURCE_ROOT; };
+		417DDB051E604DED00375BF1 /* Image360.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Image360.podspec; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,8 +79,11 @@
 		200F86951E2275CF008DF555 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				200F868D1E227582008DF555 /* Info.plist */,
+				417DDB031E604DB700375BF1 /* CHANGELOG.md */,
 				200F868C1E227582008DF555 /* Image360.h */,
+				417DDB051E604DED00375BF1 /* Image360.podspec */,
+				200F868D1E227582008DF555 /* Info.plist */,
+				417DDB011E604D6E00375BF1 /* README.md */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -179,6 +188,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				417DDB061E604DED00375BF1 /* Image360.podspec in Resources */,
 				200F869C1E2276A2008DF555 /* FragmentShader.glsl in Resources */,
 				200F86981E227643008DF555 /* black.jpg in Resources */,
 				200F869D1E2276A2008DF555 /* VertexShader.glsl in Resources */,
@@ -192,10 +202,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				417DDB021E604D6E00375BF1 /* README.md in Sources */,
 				200F86A21E22770D008DF555 /* Sphere.swift in Sources */,
 				200F86A01E2276EF008DF555 /* Inertia.swift in Sources */,
 				200F86A41E227739008DF555 /* Image360View.swift in Sources */,
 				200F86A61E227760008DF555 /* Image360Controller.swift in Sources */,
+				417DDB041E604DB700375BF1 /* CHANGELOG.md in Sources */,
 				20424EC11E243914008CD371 /* Shader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

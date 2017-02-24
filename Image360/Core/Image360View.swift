@@ -190,6 +190,11 @@ public class Image360View: GLKView {
     deinit {
         unloadTextures()
     }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        viewAspectRatio = frame.size.width / frame.size.height
+    }
 
     /// OpenGL Initial value setting method
     /// - parameter context: OpenGL Context

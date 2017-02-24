@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.4
+ - Scale problems of `Image360View` solved.
+
 ### version 0.1.3
  - `Image360ViewObserver` protocol implemented.
  - Manual scale control of `Image360View` implemented.
