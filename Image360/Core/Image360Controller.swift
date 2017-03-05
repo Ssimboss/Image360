@@ -23,15 +23,18 @@
 //  THE SOFTWARE.
 
 import UIKit
-import GLKit
 
 private let blackFileURL = Bundle(for: Image360Controller.self).url(forResource: "black", withExtension: "jpg")!
 
 /// ## Image360Controller
 /// This controller presentes a special view to dysplay 360° panoramic image.
-public class Image360Controller: GLKViewController {
+public class Image360Controller: UIViewController {
     /// Image 360 view which actually dysplays 360° panoramic image.
     public var imageView: Image360View
+    /// Special OpenGL controller to ouput Image360View
+    private let image360GLController: Image360GLController
+    /// Displays current camera position.
+    private var orientationView: OrientationView
 
     // MARK: Inertia
     private let inertiaInterval: TimeInterval = 0.020
@@ -65,22 +68,45 @@ public class Image360Controller: GLKViewController {
             imageView.image = newValue
         }
     }
+    
+    /// Set this flag `true` to hide orientation view.
+    public var isOrientationViewHidden: Bool {
+        get {
+            return orientationView.isHidden
+        }
+        set {
+            orientationView.isHidden = newValue
+        }
+    }
 
     public required init?(coder aDecoder: NSCoder) {
         imageView = Image360View(frame: CGRect(x: 0, y: 0, width: 512, height: 512))
+        image360GLController = Image360GLController(imageView: imageView)
+        let orientationView = OrientationView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0))
+        orientationView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        orientationView.tintColor = .white
+        self.orientationView = orientationView
         super.init(coder: aDecoder)
         registerGestureRecognizers()
         imageView.touchesHandler = self
-
+        imageView.orientationView = orientationView
+        
         setBlackBackground()
     }
 
     public override func loadView() {
-        self.view = imageView
-    }
-
-    public override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        imageView.draw()
+        super.loadView()
+        addChildViewController(image360GLController)
+        view.addSubview(imageView)
+        image360GLController.view.frame = view.bounds
+        image360GLController.view.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+        image360GLController.didMove(toParentViewController: self)
+        
+        view.addSubview(orientationView)
+        orientationView.frame = CGRect(origin: CGPoint(x: view.bounds.maxX - orientationView.frame.size.width - 8,
+                                                       y: view.bounds.midY - orientationView.bounds.midY),
+                                       size: orientationView.frame.size)
+        orientationView.autoresizingMask =  [.flexibleTopMargin, .flexibleBottomMargin, .flexibleLeftMargin]
     }
 
     // MARK: Appear/Disappear

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fwC-J8-UHB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fwC-J8-UHB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,7 +44,7 @@
                                     <constraint firstAttribute="width" secondItem="Yji-c7-R8Z" secondAttribute="height" multiplier="1:1" id="d7V-qF-TZT"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="Gwc-ll-8zK" kind="embed" identifier="image360" id="RlR-0P-Ndk"/>
+                                    <segue destination="iPG-5Z-Aol" kind="embed" identifier="image360" id="eYk-uY-RJV"/>
                                 </connections>
                             </containerView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="YC3-37-IGX">
@@ -165,18 +165,42 @@
                                     <action selector="pictureSegmentChangedWithSender:" destination="85w-Ka-FdT" eventType="valueChanged" id="i1A-W5-OqX"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orientation View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fq-2D-1dT">
+                                <rect key="frame" x="15" y="223" width="127" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="isOrientationViewHidden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWN-bv-PPg">
+                                <rect key="frame" x="15" y="252" width="189" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3AO-d9-PII" userLabel="isOrientationViewHidden Switch">
+                                <rect key="frame" x="311" y="247" width="51" height="31"/>
+                                <connections>
+                                    <action selector="isOrientationViewHiddenSwitchedWithSender:" destination="85w-Ka-FdT" eventType="valueChanged" id="fHo-g3-Hgy"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="3AO-d9-PII" secondAttribute="trailing" constant="15" id="02s-0K-07X"/>
                             <constraint firstItem="TNT-fq-ATj" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="COK-PJ-Gm2"/>
                             <constraint firstItem="SRE-XU-C6M" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="Il1-v4-lde"/>
                             <constraint firstItem="SRE-XU-C6M" firstAttribute="top" secondItem="TNT-fq-ATj" secondAttribute="bottom" constant="8" id="IyN-6X-7T8"/>
+                            <constraint firstItem="oWN-bv-PPg" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="JTV-5z-MrF"/>
                             <constraint firstAttribute="trailing" secondItem="VXe-al-3SO" secondAttribute="trailing" constant="15" id="JxG-Ik-pXq"/>
+                            <constraint firstItem="6Fq-2D-1dT" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="T8g-6C-sbu"/>
                             <constraint firstItem="HP9-ey-gzb" firstAttribute="top" secondItem="1dI-PS-myh" secondAttribute="bottom" constant="15" id="Tha-se-1Pg"/>
                             <constraint firstItem="HP9-ey-gzb" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="Xky-K8-AEu"/>
+                            <constraint firstItem="6Fq-2D-1dT" firstAttribute="top" secondItem="SRE-XU-C6M" secondAttribute="bottom" constant="15" id="Z2x-sU-spW"/>
                             <constraint firstItem="VXe-al-3SO" firstAttribute="top" secondItem="HP9-ey-gzb" secondAttribute="bottom" constant="8" id="hSj-ub-obT"/>
                             <constraint firstItem="TNT-fq-ATj" firstAttribute="top" secondItem="VXe-al-3SO" secondAttribute="bottom" constant="15" id="k7Z-El-RLZ"/>
+                            <constraint firstItem="oWN-bv-PPg" firstAttribute="top" secondItem="6Fq-2D-1dT" secondAttribute="bottom" constant="8" id="lKs-ao-4as"/>
                             <constraint firstAttribute="trailing" secondItem="SRE-XU-C6M" secondAttribute="trailing" constant="15" id="nGM-nz-Rgo"/>
+                            <constraint firstItem="3AO-d9-PII" firstAttribute="centerY" secondItem="oWN-bv-PPg" secondAttribute="centerY" id="ylW-dU-b4l"/>
                             <constraint firstItem="VXe-al-3SO" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="zNx-ZY-bz8"/>
                         </constraints>
                     </view>
@@ -191,6 +215,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="inertiaSegmentedControl" destination="VXe-al-3SO" id="sM3-Fq-GU6"/>
+                        <outlet property="isOrientationViewHiddenSwitch" destination="3AO-d9-PII" id="Rgo-vq-lU0"/>
                         <outlet property="pictureSegmentedControl" destination="SRE-XU-C6M" id="rqI-DP-u12"/>
                         <outlet property="saveButton" destination="xct-j8-a1z" id="HxL-4R-P7d"/>
                     </connections>
@@ -200,25 +225,23 @@
             </objects>
             <point key="canvasLocation" x="860" y="-423.23838080959524"/>
         </scene>
-        <!--GLKit View Controller-->
-        <scene sceneID="UkA-u8-ESm">
+        <!--Image360 Controller-->
+        <scene sceneID="Ing-te-7vL">
             <objects>
-                <glkViewController preferredFramesPerSecond="30" id="Gwc-ll-8zK" customClass="Image360Controller" customModule="Image360" sceneMemberID="viewController">
+                <viewController id="iPG-5Z-Aol" customClass="Image360Controller" customModule="Image360" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Abs-2K-6Sp"/>
-                        <viewControllerLayoutGuide type="bottom" id="SB4-WD-P7l"/>
+                        <viewControllerLayoutGuide type="top" id="IDG-Yp-S0y"/>
+                        <viewControllerLayoutGuide type="bottom" id="niu-gy-YHb"/>
                     </layoutGuides>
-                    <glkView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" enableSetNeedsDisplay="NO" id="dAx-eA-MLY">
+                    <view key="view" contentMode="scaleToFill" id="K8Q-MH-vik">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <connections>
-                            <outlet property="delegate" destination="Gwc-ll-8zK" id="k38-5Z-jv0"/>
-                        </connections>
-                    </glkView>
-                </glkViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hsC-0B-oJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C2B-oy-rgK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="904" y="139"/>
+            <point key="canvasLocation" x="860" y="113"/>
         </scene>
     </scenes>
 </document>

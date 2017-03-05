@@ -50,6 +50,7 @@ class ViewController: UIViewController {
                 if let destination = segue.destination as? SettingsController {
                     destination.inertia = image360Controller.inertia
                     destination.pictureIndex = pictureSegmentedControl.selectedSegmentIndex
+                    destination.isOrientationViewHidden = image360Controller.isOrientationViewHidden
                 }
             default:
                 ()
@@ -72,6 +73,7 @@ class ViewController: UIViewController {
         }
         image360Controller.inertia = settingsController.inertia
         pictureSegmentedControl.selectedSegmentIndex = settingsController.pictureIndex
+        image360Controller.isOrientationViewHidden = settingsController.isOrientationViewHidden
         segmentChanged(sender: pictureSegmentedControl)
     }
 

@@ -90,6 +90,7 @@ public class Image360View: GLKView {
     public private(set) var cameraFovDegree: Float = 45.0 {
         didSet {
             observer?.image360View(self, didChangeFOV: cameraFovDegree)
+            orientationView?.image360View(self, didChangeFOV: cameraFovDegree)
         }
     }
     /// Sets new value to `cameraFovDegree`
@@ -120,6 +121,7 @@ public class Image360View: GLKView {
     public private(set) var rotationAngleXZ: Float = 0.0 {
         didSet {
             observer?.image360View(self, didRotateOverXZ: rotationAngleXZ)
+            orientationView?.image360View(self, didRotateOverXZ: rotationAngleXZ)
         }
     }
     /// Sets new value to `rotationAngleXZ`
@@ -144,6 +146,7 @@ public class Image360View: GLKView {
     public private(set) var rotationAngleY: Float = 0.0 {
         didSet {
             observer?.image360View(self, didRotateOverY: rotationAngleY)
+            orientationView?.image360View(self, didRotateOverY: rotationAngleY)
         }
     }
     /// Sets new value to `rotationAngleY`
@@ -165,6 +168,8 @@ public class Image360View: GLKView {
 
     weak var touchesHandler: Image360ViewTouchesHandler?
     public weak var observer: Image360ViewObserver?
+    
+    weak var orientationView: OrientationView?
 
     // MARK: Init
     override init(frame: CGRect) {
@@ -279,7 +284,8 @@ public class Image360View: GLKView {
     }
 
     /// Redraw method.
-    func draw() {
+    public override func draw(_ rect: CGRect) {
+    //func draw() {
         projectionMatrix = GLKMatrix4Identity
         lookAtMatrix = GLKMatrix4Identity
         modelMatrix = GLKMatrix4Identity

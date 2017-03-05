@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.5
+ - `Image360View` now has special orientation subview. It's controlled via `isOrientationViewHidden` property.
+
 ### version 0.1.4
  - Scale problems of `Image360View` solved.
 
