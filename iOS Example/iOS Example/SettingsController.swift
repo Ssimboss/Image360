@@ -29,14 +29,17 @@ class SettingsController: UIViewController {
 
     @IBOutlet var inertiaSegmentedControl: UISegmentedControl!
     @IBOutlet var pictureSegmentedControl: UISegmentedControl!
+    @IBOutlet var isOrientationViewHiddenSwitch: UISwitch!
 
     @IBOutlet var saveButton: UIBarButtonItem!
 
     var inertia: Inertia = .none
     var pictureIndex: Int = 0
+    var isOrientationViewHidden: Bool = false
 
     private var initInertia: Inertia!
     private var initPictureIndex: Int!
+    private var initIsOrientationViewHidden: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +52,11 @@ class SettingsController: UIViewController {
         case .long:
             inertiaSegmentedControl.selectedSegmentIndex = 2
         }
+        isOrientationViewHiddenSwitch.isOn = isOrientationViewHidden
 
         initInertia = inertia
         initPictureIndex = pictureIndex
+        initIsOrientationViewHidden = isOrientationViewHidden
         pictureSegmentedControl.selectedSegmentIndex = pictureIndex
     }
 
@@ -70,11 +75,18 @@ class SettingsController: UIViewController {
         pictureIndex = sender.selectedSegmentIndex
         saveButton.isEnabled = valuesChanged
     }
+    
+    @IBAction func isOrientationViewHiddenSwitched(sender: UISwitch) {
+        isOrientationViewHidden = sender.isOn
+        saveButton.isEnabled = valuesChanged
+    }
 
     private var valuesChanged: Bool {
         if inertia != initInertia {
             return true
         } else if pictureIndex != initPictureIndex {
+            return true
+        } else if initIsOrientationViewHidden != isOrientationViewHidden {
             return true
         } else {
             return false
