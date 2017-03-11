@@ -99,7 +99,7 @@ public class Image360Controller: UIViewController {
     public var isDeviceMotionControlEnabled: Bool {
         didSet {
             if isDeviceMotionControlEnabled && !motionManager.isDeviceMotionAvailable {
-                NSLog("Device motion is not available on this device")
+                NSLog("Image360: Device motion is not available on this device")
                 isDeviceMotionControlEnabled = false
             } else if isAppear && (oldValue != isDeviceMotionControlEnabled) {
                 isDeviceMotionControlEnabled ? enableDeviceMotionControl() : disableDeviceMotionControl()

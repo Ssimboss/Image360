@@ -461,7 +461,7 @@ public class Image360View: GLKView {
         repeat{
             error = glGetError()
             if error != noError{
-                NSLog("GLERR: \(error) %@¥n", error, msg)
+                NSLog("Image360 OpenGL error: \(error) %@¥n", error, msg)
             }
         } while error != noError
     }
