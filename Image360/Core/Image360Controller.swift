@@ -80,8 +80,30 @@ public class Image360Controller: UIViewController {
         }
     }
     
+    /// If this flag is `true` then `ImageView360`-orientation could be controled with device motions.
+    public var isDeviceMotionControlEnabled: Bool {
+        didSet {
+            if isDeviceMotionControlEnabled && !motionManager.isDeviceMotionAvailable {
+                NSLog("Device motion is not available on this device")
+                isDeviceMotionControlEnabled = false
+            } else if isAppear && (oldValue != isDeviceMotionControlEnabled) {
+                isDeviceMotionControlEnabled ? enableDeviceMotionControl() : disableDeviceMotionControl()
+            }
+        }
+    }
+    
     /// MARK: Motion Management
     private var motionManager = CMMotionManager()
+    
+    private func enableDeviceMotionControl() {
+        motionManager.deviceMotionUpdateInterval = 0.1
+        let queue = OperationQueue()
+        motionManager.startDeviceMotionUpdates(to: queue, withHandler: deviceDidMove)
+    }
+    
+    private func disableDeviceMotionControl() {
+        motionManager.stopDeviceMotionUpdates()
+    }
 
     public required init?(coder aDecoder: NSCoder) {
         imageView = Image360View(frame: CGRect(x: 0, y: 0, width: 512, height: 512))
@@ -90,12 +112,14 @@ public class Image360Controller: UIViewController {
         orientationView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
         orientationView.tintColor = .white
         self.orientationView = orientationView
+        isDeviceMotionControlEnabled = motionManager.isDeviceMotionAvailable
         super.init(coder: aDecoder)
         registerGestureRecognizers()
         imageView.touchesHandler = self
         imageView.orientationView = orientationView
         
         setBlackBackground()
+        
     }
 
     public override func loadView() {
@@ -125,10 +149,8 @@ public class Image360Controller: UIViewController {
 
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if motionManager.isDeviceMotionAvailable {
-            motionManager.deviceMotionUpdateInterval = 0.1
-            let queue = OperationQueue()
-            motionManager.startDeviceMotionUpdates(to: queue, withHandler: deviceDidMove)
+        if isDeviceMotionControlEnabled {
+            enableDeviceMotionControl()
         }
         isAppear = true
     }
@@ -137,8 +159,8 @@ public class Image360Controller: UIViewController {
         imageView.unloadTextures()
 
         super.viewDidDisappear(animated)
-        if motionManager.isDeviceMotionAvailable {
-            motionManager.stopDeviceMotionUpdates()
+        if isDeviceMotionControlEnabled {
+            disableDeviceMotionControl()
         }
         isAppear = false
     }

@@ -30,16 +30,19 @@ class SettingsController: UIViewController {
     @IBOutlet var inertiaSegmentedControl: UISegmentedControl!
     @IBOutlet var pictureSegmentedControl: UISegmentedControl!
     @IBOutlet var isOrientationViewHiddenSwitch: UISwitch!
+    @IBOutlet var isDeviceMotionControlEnabledSwitch: UISwitch!
 
     @IBOutlet var saveButton: UIBarButtonItem!
 
     var inertia: Inertia = .none
     var pictureIndex: Int = 0
     var isOrientationViewHidden: Bool = false
+    var isDeviceMotionControlEnabled: Bool = false
 
     private var initInertia: Inertia!
     private var initPictureIndex: Int!
     private var initIsOrientationViewHidden: Bool!
+    private var initIsDeviceMotionControlEnabled: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,10 +56,12 @@ class SettingsController: UIViewController {
             inertiaSegmentedControl.selectedSegmentIndex = 2
         }
         isOrientationViewHiddenSwitch.isOn = isOrientationViewHidden
+        isDeviceMotionControlEnabledSwitch.isOn = isDeviceMotionControlEnabled
 
         initInertia = inertia
         initPictureIndex = pictureIndex
         initIsOrientationViewHidden = isOrientationViewHidden
+        initIsDeviceMotionControlEnabled = isDeviceMotionControlEnabled
         pictureSegmentedControl.selectedSegmentIndex = pictureIndex
     }
 
@@ -80,6 +85,11 @@ class SettingsController: UIViewController {
         isOrientationViewHidden = sender.isOn
         saveButton.isEnabled = valuesChanged
     }
+    
+    @IBAction func isDeviceMotionControlEnabledSwitched(sender: UISwitch) {
+        isDeviceMotionControlEnabled = sender.isOn
+        saveButton.isEnabled = valuesChanged
+    }
 
     private var valuesChanged: Bool {
         if inertia != initInertia {
@@ -87,6 +97,8 @@ class SettingsController: UIViewController {
         } else if pictureIndex != initPictureIndex {
             return true
         } else if initIsOrientationViewHidden != isOrientationViewHidden {
+            return true
+        } else if initIsDeviceMotionControlEnabled != isDeviceMotionControlEnabled {
             return true
         } else {
             return false
