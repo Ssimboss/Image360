@@ -46,9 +46,24 @@ public class Image360Controller: UIViewController {
 
     private var inertiaRatio: Float?
 
-    /// Inertia of pan gestures. In case inertia is enabled (not equal to .none)
-    /// view of **Image360Controller** continue to rotate after pan gestures for some time.
-    public var inertia: Inertia = .short {
+    /// Inertia of pan gestures. In case inertia is enabled view of
+    /// `Image360Controller` continue to rotate after pan gestures for some time.
+    /// Range of value: 0...1
+    public var inertia: Float {
+        get {
+            return _inertia
+        }
+        set {
+            if newValue < 0 {
+                _inertia = 0
+            } else if newValue > 1 {
+                _inertia = 1
+            } else {
+                _inertia = newValue
+            }
+        }
+    }
+    private var _inertia: Float = 0.1 {
         willSet {
             inertiaTimer?.invalidate()
             inertiaTimer = nil
@@ -244,7 +259,7 @@ public class Image360Controller: UIViewController {
             inertiaTimer?.invalidate()
             inertiaTimerCount = 0
 
-            if inertia != .none {
+            if inertia > 0.05 {
                 inertiaTimer = Timer.scheduledTimer(timeInterval: inertiaInterval,
                                                     target: self,
                                                     selector: #selector(inertiaTimerHandler(timer:)),
@@ -273,15 +288,7 @@ public class Image360Controller: UIViewController {
         var diffY: Float = 0
 
         if inertiaTimerCount == 0 {
-            inertiaRatio = 1.0
-            switch inertia {
-            case .short:
-                inertiaRatio = weakIntertiaRatio
-            case .long:
-                inertiaRatio = strongIntertiaRatio
-            case .none:
-                ()
-            }
+            inertiaRatio = inertia * 10.0
         } else if inertiaTimerCount > 150 {
             inertiaTimer?.invalidate()
             inertiaTimer = nil
