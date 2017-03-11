@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 
 import UIKit
+import CoreMotion
 
 private let blackFileURL = Bundle(for: Image360Controller.self).url(forResource: "black", withExtension: "jpg")!
 
@@ -78,6 +79,9 @@ public class Image360Controller: UIViewController {
             orientationView.isHidden = newValue
         }
     }
+    
+    /// MARK: Motion Management
+    private var motionManager = CMMotionManager()
 
     public required init?(coder aDecoder: NSCoder) {
         imageView = Image360View(frame: CGRect(x: 0, y: 0, width: 512, height: 512))
@@ -121,6 +125,11 @@ public class Image360Controller: UIViewController {
 
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if motionManager.isDeviceMotionAvailable {
+            motionManager.deviceMotionUpdateInterval = 0.1
+            let queue = OperationQueue()
+            motionManager.startDeviceMotionUpdates(to: queue, withHandler: deviceDidMove)
+        }
         isAppear = true
     }
 
@@ -128,6 +137,9 @@ public class Image360Controller: UIViewController {
         imageView.unloadTextures()
 
         super.viewDidDisappear(animated)
+        if motionManager.isDeviceMotionAvailable {
+            motionManager.stopDeviceMotionUpdates()
+        }
         isAppear = false
     }
 
@@ -195,7 +207,8 @@ public class Image360Controller: UIViewController {
                 panLastDiffY = cur.y - panPrev!.y
 
                 panPrev = cur
-                rotate(diffx: -Float(panLastDiffX!), diffy: Float(panLastDiffY!))
+                rotate(diffx: -Float(panLastDiffX!) / divideRotateX,
+                       diffy: Float(panLastDiffY!) / divideRotateY)
             } else {
                 isPanning = true
                 panPrev = cur
@@ -227,7 +240,8 @@ public class Image360Controller: UIViewController {
             diffX = Float(panLastDiffX!) * (1.0 / Float(inertiaTimerCount)) * inertiaRatio!
             diffY = Float(panLastDiffY!) * (1.0 / Float(inertiaTimerCount)) * inertiaRatio!
 
-            rotate(diffx: -diffX, diffy: diffY)
+            rotate(diffx: -diffX / divideRotateX,
+                   diffy: diffY / divideRotateY)
         }
 
         inertiaTimerCount += 1
@@ -259,12 +273,32 @@ public class Image360Controller: UIViewController {
     /// Rotation method
     /// - parameter diffx: Rotation amount (y axis)
     /// - parameter diffy: Rotation amount (xy plane)
-    func rotate(diffx: Float, diffy: Float) {
-        let xz = diffx / divideRotateX
-        let y = diffy / divideRotateY
-
-        imageView.setRotationAngleXZ(newValue: imageView.rotationAngleXZ + xz)
-        imageView.setRotationAngleY(newValue: imageView.rotationAngleY + y)
+    private func rotate(diffx: Float, diffy: Float) {
+        imageView.setRotationAngleXZ(newValue: imageView.rotationAngleXZ + diffx)
+        imageView.setRotationAngleY(newValue: imageView.rotationAngleY + diffy)
+    }
+    
+    private var _lastAttitude: CMAttitude?
+    /// Device Motion Updates Handler
+    /// - parameter data: New data of device motion.
+    /// - parameter error: Error catched by device.
+    private func deviceDidMove(data: CMDeviceMotion?, error: Error?) {
+        guard let data = data else {
+            return
+        }
+        guard let lastAttitude = _lastAttitude else {
+            _lastAttitude = data.attitude
+            return
+        }
+        _lastAttitude = data.attitude.copy() as? CMAttitude
+        
+        data.attitude.multiply(byInverseOf: lastAttitude)
+        
+        let diffXZ = -Float(data.attitude.roll)
+        let diffY = Float(data.attitude.pitch)
+        DispatchQueue.main.async { [weak self] in
+            self?.rotate(diffx: diffXZ, diffy: diffY)
+        }
     }
 }
 
