@@ -27,47 +27,44 @@ import Image360
 
 class SettingsController: UIViewController {
 
-    @IBOutlet var inertiaSegmentedControl: UISegmentedControl!
+    @IBOutlet var inertiaSlider: UISlider!
     @IBOutlet var pictureSegmentedControl: UISegmentedControl!
     @IBOutlet var isOrientationViewHiddenSwitch: UISwitch!
+    @IBOutlet var isDeviceMotionControlEnabledSwitch: UISwitch!
+    @IBOutlet var isGestureControlEnabledSwitch: UISwitch!
 
     @IBOutlet var saveButton: UIBarButtonItem!
 
-    var inertia: Inertia = .none
+    var inertia: Float = 0
     var pictureIndex: Int = 0
     var isOrientationViewHidden: Bool = false
+    var isDeviceMotionControlEnabled: Bool = false
+    var isGestureControlEnabled: Bool = false
 
-    private var initInertia: Inertia!
+    private var initInertia: Float!
     private var initPictureIndex: Int!
     private var initIsOrientationViewHidden: Bool!
+    private var initIsDeviceMotionControlEnabled: Bool!
+    private var initIsGestureControlEnabled: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        switch inertia {
-        case .none:
-            inertiaSegmentedControl.selectedSegmentIndex = 0
-        case .short:
-            inertiaSegmentedControl.selectedSegmentIndex = 1
-        case .long:
-            inertiaSegmentedControl.selectedSegmentIndex = 2
-        }
+        inertiaSlider.value = inertia
         isOrientationViewHiddenSwitch.isOn = isOrientationViewHidden
+        isDeviceMotionControlEnabledSwitch.isOn = isDeviceMotionControlEnabled
+        isGestureControlEnabledSwitch.isOn = isGestureControlEnabled
 
         initInertia = inertia
         initPictureIndex = pictureIndex
         initIsOrientationViewHidden = isOrientationViewHidden
+        initIsDeviceMotionControlEnabled = isDeviceMotionControlEnabled
+        initIsGestureControlEnabled = isGestureControlEnabled
         pictureSegmentedControl.selectedSegmentIndex = pictureIndex
     }
 
-    @IBAction func inertiaSegmentChanged(sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0: inertia = .none
-        case 1: inertia = .short
-        case 2: inertia = .long
-        default:
-            assertionFailure("Unexpected selected segment index")
-        }
+    @IBAction func inertiaSliderChanged(sender: UISlider) {
+        inertia = sender.value
         saveButton.isEnabled = valuesChanged
     }
 
@@ -80,13 +77,27 @@ class SettingsController: UIViewController {
         isOrientationViewHidden = sender.isOn
         saveButton.isEnabled = valuesChanged
     }
+    
+    @IBAction func isDeviceMotionControlEnabledSwitched(sender: UISwitch) {
+        isDeviceMotionControlEnabled = sender.isOn
+        saveButton.isEnabled = valuesChanged
+    }
+    
+    @IBAction func isGestureControlEnabledSwitched(sender: UISwitch) {
+        isGestureControlEnabled = sender.isOn
+        saveButton.isEnabled = valuesChanged
+    }
 
     private var valuesChanged: Bool {
-        if inertia != initInertia {
+        if abs(inertia - initInertia) > 0.01 {
             return true
         } else if pictureIndex != initPictureIndex {
             return true
         } else if initIsOrientationViewHidden != isOrientationViewHidden {
+            return true
+        } else if initIsDeviceMotionControlEnabled != isDeviceMotionControlEnabled {
+            return true
+        } else if initIsGestureControlEnabled != isGestureControlEnabled {
             return true
         } else {
             return false

@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 
 import UIKit
+import CoreMotion
 
 private let blackFileURL = Bundle(for: Image360Controller.self).url(forResource: "black", withExtension: "jpg")!
 
@@ -45,9 +46,24 @@ public class Image360Controller: UIViewController {
 
     private var inertiaRatio: Float?
 
-    /// Inertia of pan gestures. In case inertia is enabled (not equal to .none)
-    /// view of **Image360Controller** continue to rotate after pan gestures for some time.
-    public var inertia: Inertia = .short {
+    /// Inertia of pan gestures. In case inertia is enabled view of
+    /// `Image360Controller` continue to rotate after pan gestures for some time.
+    /// Range of value: 0...1
+    public var inertia: Float {
+        get {
+            return _inertia
+        }
+        set {
+            if newValue < 0 {
+                _inertia = 0
+            } else if newValue > 1 {
+                _inertia = 1
+            } else {
+                _inertia = newValue
+            }
+        }
+    }
+    private var _inertia: Float = 0.1 {
         willSet {
             inertiaTimer?.invalidate()
             inertiaTimer = nil
@@ -78,6 +94,45 @@ public class Image360Controller: UIViewController {
             orientationView.isHidden = newValue
         }
     }
+    
+    /// If this flag is `true` then `ImageView360`-orientation could be controled with device motions.
+    public var isDeviceMotionControlEnabled: Bool {
+        didSet {
+            if isDeviceMotionControlEnabled && !motionManager.isDeviceMotionAvailable {
+                NSLog("Image360: Device motion is not available on this device")
+                isDeviceMotionControlEnabled = false
+            } else if isAppear && (oldValue != isDeviceMotionControlEnabled) {
+                isDeviceMotionControlEnabled ? enableDeviceMotionControl() : disableDeviceMotionControl()
+            }
+        }
+    }
+    
+    /// If this flag is `true` then `ImageView360`-orientation could be controled with gestures.
+    public var isGestureControlEnabled: Bool {
+        didSet {
+            guard oldValue != isGestureControlEnabled else {
+                return
+            }
+            if isGestureControlEnabled {
+                registerGestureRecognizers()
+            } else {
+                removeGestureRecognizers()
+            }
+        }
+    }
+    
+    /// MARK: Motion Management
+    private var motionManager = CMMotionManager()
+    
+    private func enableDeviceMotionControl() {
+        motionManager.deviceMotionUpdateInterval = 0.07
+        let queue = OperationQueue()
+        motionManager.startDeviceMotionUpdates(to: queue, withHandler: deviceDidMove)
+    }
+    
+    private func disableDeviceMotionControl() {
+        motionManager.stopDeviceMotionUpdates()
+    }
 
     public required init?(coder aDecoder: NSCoder) {
         imageView = Image360View(frame: CGRect(x: 0, y: 0, width: 512, height: 512))
@@ -86,12 +141,15 @@ public class Image360Controller: UIViewController {
         orientationView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
         orientationView.tintColor = .white
         self.orientationView = orientationView
+        isDeviceMotionControlEnabled = motionManager.isDeviceMotionAvailable
+        isGestureControlEnabled = true
         super.init(coder: aDecoder)
         registerGestureRecognizers()
         imageView.touchesHandler = self
         imageView.orientationView = orientationView
         
         setBlackBackground()
+        
     }
 
     public override func loadView() {
@@ -121,6 +179,9 @@ public class Image360Controller: UIViewController {
 
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if isDeviceMotionControlEnabled {
+            enableDeviceMotionControl()
+        }
         isAppear = true
     }
 
@@ -128,6 +189,9 @@ public class Image360Controller: UIViewController {
         imageView.unloadTextures()
 
         super.viewDidDisappear(animated)
+        if isDeviceMotionControlEnabled {
+            disableDeviceMotionControl()
+        }
         isAppear = false
     }
 
@@ -139,26 +203,39 @@ public class Image360Controller: UIViewController {
     }
 
     // MARK: Gestures
-    private var panGestureRecognizer: UIPanGestureRecognizer!
-    private var pinchGestureRecognizer: UIPinchGestureRecognizer!
+    private var panGestureRecognizer: UIPanGestureRecognizer?
+    private var pinchGestureRecognizer: UIPinchGestureRecognizer?
 
     fileprivate var isPanning = false
     private var panPrev: CGPoint?
     private var panLastDiffX: CGFloat?
     private var panLastDiffY: CGFloat?
 
-    /// Gesture registration method
+    /// Creates gesture recognazer instances.
     private func registerGestureRecognizers() {
-        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler(recognizer:)))
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler(recognizer:)))
         panGestureRecognizer.maximumNumberOfTouches = 1
         panGestureRecognizer.delegate = self
         imageView.addGestureRecognizer(panGestureRecognizer)
+        self.panGestureRecognizer = panGestureRecognizer
 
-        pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchGestureHandler(recognizer:)))
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchGestureHandler(recognizer:)))
         pinchGestureRecognizer.delegate = self
         imageView.addGestureRecognizer(pinchGestureRecognizer)
+        self.pinchGestureRecognizer = pinchGestureRecognizer
     }
-
+    
+    /// Remove gesture recognazer instances.
+    private func removeGestureRecognizers() {
+        if let panGestureRecognizer = panGestureRecognizer {
+            imageView.removeGestureRecognizer(panGestureRecognizer)
+        }
+        if let pinchGestureRecognizer = pinchGestureRecognizer {
+            imageView.removeGestureRecognizer(pinchGestureRecognizer)
+        }
+        panGestureRecognizer = nil
+        pinchGestureRecognizer = nil
+    }
 
     /// Pinch operation compatibility handler
     /// - parameter recognizer: Recognizer object for gesture operations
@@ -182,7 +259,7 @@ public class Image360Controller: UIViewController {
             inertiaTimer?.invalidate()
             inertiaTimerCount = 0
 
-            if inertia != .none {
+            if inertia > 0.05 {
                 inertiaTimer = Timer.scheduledTimer(timeInterval: inertiaInterval,
                                                     target: self,
                                                     selector: #selector(inertiaTimerHandler(timer:)),
@@ -195,7 +272,8 @@ public class Image360Controller: UIViewController {
                 panLastDiffY = cur.y - panPrev!.y
 
                 panPrev = cur
-                rotate(diffx: -Float(panLastDiffX!), diffy: Float(panLastDiffY!))
+                rotate(diffx: -Float(panLastDiffX!) / divideRotateX,
+                       diffy: Float(panLastDiffY!) / divideRotateY)
             } else {
                 isPanning = true
                 panPrev = cur
@@ -210,15 +288,7 @@ public class Image360Controller: UIViewController {
         var diffY: Float = 0
 
         if inertiaTimerCount == 0 {
-            inertiaRatio = 1.0
-            switch inertia {
-            case .short:
-                inertiaRatio = weakIntertiaRatio
-            case .long:
-                inertiaRatio = strongIntertiaRatio
-            case .none:
-                ()
-            }
+            inertiaRatio = inertia * 10.0
         } else if inertiaTimerCount > 150 {
             inertiaTimer?.invalidate()
             inertiaTimer = nil
@@ -227,7 +297,8 @@ public class Image360Controller: UIViewController {
             diffX = Float(panLastDiffX!) * (1.0 / Float(inertiaTimerCount)) * inertiaRatio!
             diffY = Float(panLastDiffY!) * (1.0 / Float(inertiaTimerCount)) * inertiaRatio!
 
-            rotate(diffx: -diffX, diffy: diffY)
+            rotate(diffx: -diffX / divideRotateX,
+                   diffy: diffY / divideRotateY)
         }
 
         inertiaTimerCount += 1
@@ -259,12 +330,32 @@ public class Image360Controller: UIViewController {
     /// Rotation method
     /// - parameter diffx: Rotation amount (y axis)
     /// - parameter diffy: Rotation amount (xy plane)
-    func rotate(diffx: Float, diffy: Float) {
-        let xz = diffx / divideRotateX
-        let y = diffy / divideRotateY
-
-        imageView.setRotationAngleXZ(newValue: imageView.rotationAngleXZ + xz)
-        imageView.setRotationAngleY(newValue: imageView.rotationAngleY + y)
+    private func rotate(diffx: Float, diffy: Float) {
+        imageView.setRotationAngleXZ(newValue: imageView.rotationAngleXZ + diffx)
+        imageView.setRotationAngleY(newValue: imageView.rotationAngleY + diffy)
+    }
+    
+    private var _lastAttitude: CMAttitude?
+    /// Device Motion Updates Handler
+    /// - parameter data: New data of device motion.
+    /// - parameter error: Error catched by device.
+    private func deviceDidMove(data: CMDeviceMotion?, error: Error?) {
+        guard let data = data else {
+            return
+        }
+        guard let lastAttitude = _lastAttitude else {
+            _lastAttitude = data.attitude
+            return
+        }
+        _lastAttitude = data.attitude.copy() as? CMAttitude
+        
+        data.attitude.multiply(byInverseOf: lastAttitude)
+        
+        let diffXZ = -Float(data.attitude.roll)
+        let diffY = Float(data.attitude.pitch)
+        DispatchQueue.main.async { [weak self] in
+            self?.rotate(diffx: diffXZ, diffy: diffY)
+        }
     }
 }
 

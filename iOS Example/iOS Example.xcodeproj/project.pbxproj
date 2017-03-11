@@ -16,6 +16,7 @@
 		20424EBF1E242AF2008CD371 /* picture2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 20424EBE1E242AF2008CD371 /* picture2.jpg */; };
 		206EC8D11E227BCE00E25EBA /* Image360.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206EC8D01E2279CE00E25EBA /* Image360.framework */; };
 		207092411E360388006407FA /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207092401E360388006407FA /* SettingsController.swift */; };
+		4176D2341E7412F900BE4FC4 /* Image360.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 206EC8D01E2279CE00E25EBA /* Image360.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,7 +27,28 @@
 			remoteGlobalIDString = 200F86891E227582008DF555;
 			remoteInfo = Image360;
 		};
+		4176D2351E7412F900BE4FC4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 206EC8CB1E2279CE00E25EBA /* Image360.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 200F86881E227581008DF555;
+			remoteInfo = Image360;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4176D2371E7412F900BE4FC4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4176D2341E7412F900BE4FC4 /* Image360.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		200F86B31E227891008DF555 /* iOS Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,10 +127,12 @@
 				200F86AF1E227891008DF555 /* Sources */,
 				200F86B01E227891008DF555 /* Frameworks */,
 				200F86B11E227891008DF555 /* Resources */,
+				4176D2371E7412F900BE4FC4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4176D2361E7412F900BE4FC4 /* PBXTargetDependency */,
 			);
 			name = "iOS Example";
 			productName = "iOS Example";
@@ -193,6 +217,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4176D2361E7412F900BE4FC4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Image360;
+			targetProxy = 4176D2351E7412F900BE4FC4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		200F86BA1E227891008DF555 /* Main.storyboard */ = {
@@ -310,6 +342,7 @@
 		200F86C61E227891008DF555 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4NJ84NR932;
 				INFOPLIST_FILE = "iOS Example/Info.plist";
@@ -323,6 +356,7 @@
 		200F86C71E227891008DF555 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4NJ84NR932;
 				INFOPLIST_FILE = "iOS Example/Info.plist";

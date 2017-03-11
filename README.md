@@ -1,4 +1,4 @@
-[![Version](https://img.shields.io/github/tag/Ssimboss/Image360.svg?label=beta)](https://github.com/Ssimboss/Image360/tree/0.1.5)
+[![Version](https://img.shields.io/github/tag/Ssimboss/Image360.svg?label=beta)](https://github.com/Ssimboss/Image360/tree/0.1.6)
 [![CocoaPods Compatible](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg)](https://cocoapods.org/pods/Image360)
 [![CocoaPods license](https://img.shields.io/cocoapods/l/Image360.svg)](https://github.com/Ssimboss/Image360/blob/master/LICENSE)
 
@@ -12,7 +12,10 @@ Image360 is a simple stack of Image360Controller + Image360View which allows you
 ## How to use it?
 - Create an instance of `Image360Controller` in your code.
 - Set 360° image as `image: UIImage` of just created instance.
-- If it is necessary, set up the `inertia: Inertia` of just created instance.
+- Use `inertia: Float` of instance to setup inertia of gestures.
+- You can switch off special orientation subview(compass view) with `isOrientationViewHidden: Bool` flag.
+- `Image360View` is controles with gestures and device motions by default. You can switch on this features via `isDeviceMotionControlEnabled` and `isGestureControlEnabled` flags.
+
  
 ### Example
  
@@ -56,7 +59,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-pod 'Image360', '~> 0.1.5'
+pod 'Image360', '~> 0.1.6'
 end
 ```
 

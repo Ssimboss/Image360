@@ -51,6 +51,8 @@ class ViewController: UIViewController {
                     destination.inertia = image360Controller.inertia
                     destination.pictureIndex = pictureSegmentedControl.selectedSegmentIndex
                     destination.isOrientationViewHidden = image360Controller.isOrientationViewHidden
+                    destination.isDeviceMotionControlEnabled = image360Controller.isDeviceMotionControlEnabled
+                    destination.isGestureControlEnabled = image360Controller.isGestureControlEnabled
                 }
             default:
                 ()
@@ -74,6 +76,8 @@ class ViewController: UIViewController {
         image360Controller.inertia = settingsController.inertia
         pictureSegmentedControl.selectedSegmentIndex = settingsController.pictureIndex
         image360Controller.isOrientationViewHidden = settingsController.isOrientationViewHidden
+        image360Controller.isDeviceMotionControlEnabled = settingsController.isDeviceMotionControlEnabled
+        image360Controller.isGestureControlEnabled = settingsController.isGestureControlEnabled
         segmentChanged(sender: pictureSegmentedControl)
     }
 

@@ -11,7 +11,6 @@
 		200F86981E227643008DF555 /* black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 200F86971E227643008DF555 /* black.jpg */; };
 		200F869C1E2276A2008DF555 /* FragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 200F869A1E2276A2008DF555 /* FragmentShader.glsl */; };
 		200F869D1E2276A2008DF555 /* VertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 200F869B1E2276A2008DF555 /* VertexShader.glsl */; };
-		200F86A01E2276EF008DF555 /* Inertia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F869F1E2276EF008DF555 /* Inertia.swift */; };
 		200F86A21E22770D008DF555 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F86A11E22770D008DF555 /* Sphere.swift */; };
 		200F86A41E227739008DF555 /* Image360View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F86A31E227739008DF555 /* Image360View.swift */; };
 		200F86A61E227760008DF555 /* Image360Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F86A51E227760008DF555 /* Image360Controller.swift */; };
@@ -30,7 +29,6 @@
 		200F86971E227643008DF555 /* black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = black.jpg; sourceTree = "<group>"; };
 		200F869A1E2276A2008DF555 /* FragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FragmentShader.glsl; sourceTree = "<group>"; };
 		200F869B1E2276A2008DF555 /* VertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertexShader.glsl; sourceTree = "<group>"; };
-		200F869F1E2276EF008DF555 /* Inertia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inertia.swift; sourceTree = "<group>"; };
 		200F86A11E22770D008DF555 /* Sphere.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 		200F86A31E227739008DF555 /* Image360View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image360View.swift; sourceTree = "<group>"; };
 		200F86A51E227760008DF555 /* Image360Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image360Controller.swift; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 				200F86A51E227760008DF555 /* Image360Controller.swift */,
 				41FAB87A1E6AFC06007FEFFA /* Image360GLController.swift */,
 				200F86A31E227739008DF555 /* Image360View.swift */,
-				200F869F1E2276EF008DF555 /* Inertia.swift */,
 				410B983A1E6345A800FF5C5C /* OrientationView.swift */,
 				20424EC01E243914008CD371 /* Shader.swift */,
 				200F86A11E22770D008DF555 /* Sphere.swift */,
@@ -166,7 +163,6 @@
 				TargetAttributes = {
 					200F86881E227581008DF555 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 4NJ84NR932;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
@@ -210,7 +206,6 @@
 			files = (
 				417DDB021E604D6E00375BF1 /* README.md in Sources */,
 				200F86A21E22770D008DF555 /* Sphere.swift in Sources */,
-				200F86A01E2276EF008DF555 /* Inertia.swift in Sources */,
 				200F86A41E227739008DF555 /* Image360View.swift in Sources */,
 				200F86A61E227760008DF555 /* Image360Controller.swift in Sources */,
 				417DDB041E604DB700375BF1 /* CHANGELOG.md in Sources */,
@@ -328,7 +323,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4NJ84NR932;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -349,7 +344,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4NJ84NR932;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

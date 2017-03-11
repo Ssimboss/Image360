@@ -162,9 +162,9 @@ public class Image360View: GLKView {
         }
     }
     /// Minimum possible value of `rotationAngleY`
-    public let rotationAngleYMax = Float(M_PI_2)
+    public let rotationAngleYMax = Float(M_PI_2) - 0.01 //0.01 to prevent screen drag
     /// Maximum possible value of `rotationAngleY`
-    public let rotationAngleYMin = -Float(M_PI_2)
+    public let rotationAngleYMin = -Float(M_PI_2) + 0.01 //0.01 to prevent screen drag
 
     weak var touchesHandler: Image360ViewTouchesHandler?
     public weak var observer: Image360ViewObserver?
@@ -461,7 +461,7 @@ public class Image360View: GLKView {
         repeat{
             error = glGetError()
             if error != noError{
-                NSLog("GLERR: \(error) %@¥n", error, msg)
+                NSLog("Image360 OpenGL error: \(error) %@¥n", error, msg)
             }
         } while error != noError
     }

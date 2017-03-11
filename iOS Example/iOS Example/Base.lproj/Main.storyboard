@@ -130,33 +130,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inertia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HP9-ey-gzb">
-                                <rect key="frame" x="15" y="79" width="48.5" height="21"/>
+                                <rect key="frame" x="15" y="320" width="48.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VXe-al-3SO">
-                                <rect key="frame" x="15" y="108" width="345" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="j6k-4c-h6Q"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="None"/>
-                                    <segment title="Short"/>
-                                    <segment title="Long"/>
-                                </segments>
-                                <connections>
-                                    <action selector="inertiaSegmentChangedWithSender:" destination="85w-Ka-FdT" eventType="valueChanged" id="arr-Pw-k0X"/>
-                                </connections>
-                            </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNT-fq-ATj">
-                                <rect key="frame" x="15" y="151" width="54" height="21"/>
+                                <rect key="frame" x="15" y="79" width="54" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="SRE-XU-C6M">
-                                <rect key="frame" x="15" y="180" width="345" height="29"/>
+                                <rect key="frame" x="15" y="108" width="345" height="29"/>
                                 <segments>
                                     <segment title="Picture 1"/>
                                     <segment title="Picture 2"/>
@@ -166,42 +152,88 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orientation View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fq-2D-1dT">
-                                <rect key="frame" x="15" y="223" width="127" height="21"/>
+                                <rect key="frame" x="15" y="151" width="127" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="isOrientationViewHidden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWN-bv-PPg">
-                                <rect key="frame" x="15" y="252" width="189" height="21"/>
+                                <rect key="frame" x="15" y="180" width="189" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3AO-d9-PII" userLabel="isOrientationViewHidden Switch">
-                                <rect key="frame" x="311" y="247" width="51" height="31"/>
+                                <rect key="frame" x="311" y="175" width="51" height="31"/>
                                 <connections>
                                     <action selector="isOrientationViewHiddenSwitchedWithSender:" destination="85w-Ka-FdT" eventType="valueChanged" id="fHo-g3-Hgy"/>
                                 </connections>
                             </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Control" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vte-kh-sGa">
+                                <rect key="frame" x="15" y="209" width="56.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="isDeviceMotionControlEnabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vb-fO-8kw">
+                                <rect key="frame" x="15" y="238" width="235.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UCd-rl-JRQ">
+                                <rect key="frame" x="311" y="233" width="51" height="31"/>
+                                <connections>
+                                    <action selector="isDeviceMotionControlEnabledSwitchedWithSender:" destination="85w-Ka-FdT" eventType="touchUpInside" id="vhS-4A-SEv"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="isGestureControlEnabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsS-7K-jas">
+                                <rect key="frame" x="15" y="279" width="191" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O7a-IQ-AIC">
+                                <rect key="frame" x="311" y="274" width="51" height="31"/>
+                                <connections>
+                                    <action selector="isGestureControlEnabledSwitchedWithSender:" destination="85w-Ka-FdT" eventType="valueChanged" id="lHV-cY-zyc"/>
+                                </connections>
+                            </switch>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="VAT-B9-Uaf">
+                                <rect key="frame" x="76.5" y="315.5" width="285.5" height="31"/>
+                                <connections>
+                                    <action selector="inertiaSliderChangedWithSender:" destination="85w-Ka-FdT" eventType="valueChanged" id="fjq-fK-Jq3"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="3AO-d9-PII" secondAttribute="trailing" constant="15" id="02s-0K-07X"/>
+                            <constraint firstItem="VAT-B9-Uaf" firstAttribute="centerY" secondItem="HP9-ey-gzb" secondAttribute="centerY" id="1CU-bf-nje"/>
+                            <constraint firstItem="QsS-7K-jas" firstAttribute="top" secondItem="2vb-fO-8kw" secondAttribute="bottom" constant="20" id="8ww-az-GF8"/>
+                            <constraint firstAttribute="trailing" secondItem="O7a-IQ-AIC" secondAttribute="trailing" constant="15" id="BmF-7p-njH"/>
+                            <constraint firstItem="Vte-kh-sGa" firstAttribute="top" secondItem="oWN-bv-PPg" secondAttribute="bottom" constant="8" id="C4Z-ax-7FM"/>
                             <constraint firstItem="TNT-fq-ATj" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="COK-PJ-Gm2"/>
                             <constraint firstItem="SRE-XU-C6M" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="Il1-v4-lde"/>
+                            <constraint firstItem="2vb-fO-8kw" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="ItG-ZK-ici"/>
                             <constraint firstItem="SRE-XU-C6M" firstAttribute="top" secondItem="TNT-fq-ATj" secondAttribute="bottom" constant="8" id="IyN-6X-7T8"/>
                             <constraint firstItem="oWN-bv-PPg" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="JTV-5z-MrF"/>
-                            <constraint firstAttribute="trailing" secondItem="VXe-al-3SO" secondAttribute="trailing" constant="15" id="JxG-Ik-pXq"/>
+                            <constraint firstItem="O7a-IQ-AIC" firstAttribute="centerY" secondItem="QsS-7K-jas" secondAttribute="centerY" id="Lju-Le-t6J"/>
+                            <constraint firstItem="VAT-B9-Uaf" firstAttribute="leading" secondItem="HP9-ey-gzb" secondAttribute="trailing" constant="15" id="OK6-JX-JGU"/>
+                            <constraint firstItem="Vte-kh-sGa" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="PR9-k2-Dyc"/>
                             <constraint firstItem="6Fq-2D-1dT" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="T8g-6C-sbu"/>
-                            <constraint firstItem="HP9-ey-gzb" firstAttribute="top" secondItem="1dI-PS-myh" secondAttribute="bottom" constant="15" id="Tha-se-1Pg"/>
+                            <constraint firstItem="UCd-rl-JRQ" firstAttribute="centerY" secondItem="2vb-fO-8kw" secondAttribute="centerY" id="VEc-Uf-35I"/>
+                            <constraint firstItem="QsS-7K-jas" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="Xeq-gh-nOm"/>
                             <constraint firstItem="HP9-ey-gzb" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="Xky-K8-AEu"/>
+                            <constraint firstItem="TNT-fq-ATj" firstAttribute="top" secondItem="1dI-PS-myh" secondAttribute="bottom" constant="15" id="Z00-C9-Fst"/>
                             <constraint firstItem="6Fq-2D-1dT" firstAttribute="top" secondItem="SRE-XU-C6M" secondAttribute="bottom" constant="15" id="Z2x-sU-spW"/>
-                            <constraint firstItem="VXe-al-3SO" firstAttribute="top" secondItem="HP9-ey-gzb" secondAttribute="bottom" constant="8" id="hSj-ub-obT"/>
-                            <constraint firstItem="TNT-fq-ATj" firstAttribute="top" secondItem="VXe-al-3SO" secondAttribute="bottom" constant="15" id="k7Z-El-RLZ"/>
+                            <constraint firstItem="2vb-fO-8kw" firstAttribute="top" secondItem="Vte-kh-sGa" secondAttribute="bottom" constant="8" id="aAo-fj-YCv"/>
+                            <constraint firstItem="HP9-ey-gzb" firstAttribute="top" secondItem="QsS-7K-jas" secondAttribute="bottom" constant="20" id="ehK-iZ-mfl"/>
+                            <constraint firstAttribute="trailing" secondItem="UCd-rl-JRQ" secondAttribute="trailing" constant="15" id="ics-yT-sbD"/>
+                            <constraint firstAttribute="trailing" secondItem="VAT-B9-Uaf" secondAttribute="trailing" constant="15" id="kcS-4E-9o0"/>
                             <constraint firstItem="oWN-bv-PPg" firstAttribute="top" secondItem="6Fq-2D-1dT" secondAttribute="bottom" constant="8" id="lKs-ao-4as"/>
                             <constraint firstAttribute="trailing" secondItem="SRE-XU-C6M" secondAttribute="trailing" constant="15" id="nGM-nz-Rgo"/>
                             <constraint firstItem="3AO-d9-PII" firstAttribute="centerY" secondItem="oWN-bv-PPg" secondAttribute="centerY" id="ylW-dU-b4l"/>
-                            <constraint firstItem="VXe-al-3SO" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="zNx-ZY-bz8"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -214,7 +246,9 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="inertiaSegmentedControl" destination="VXe-al-3SO" id="sM3-Fq-GU6"/>
+                        <outlet property="inertiaSlider" destination="VAT-B9-Uaf" id="0Uv-Dv-w3Y"/>
+                        <outlet property="isDeviceMotionControlEnabledSwitch" destination="UCd-rl-JRQ" id="ahR-f0-iMB"/>
+                        <outlet property="isGestureControlEnabledSwitch" destination="O7a-IQ-AIC" id="Ps5-SE-apV"/>
                         <outlet property="isOrientationViewHiddenSwitch" destination="3AO-d9-PII" id="Rgo-vq-lU0"/>
                         <outlet property="pictureSegmentedControl" destination="SRE-XU-C6M" id="rqI-DP-u12"/>
                         <outlet property="saveButton" destination="xct-j8-a1z" id="HxL-4R-P7d"/>
