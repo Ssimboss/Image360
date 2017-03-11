@@ -12,7 +12,10 @@ Image360 is a simple stack of Image360Controller + Image360View which allows you
 ## How to use it?
 - Create an instance of `Image360Controller` in your code.
 - Set 360° image as `image: UIImage` of just created instance.
-- If it is necessary, set up the `inertia: Inertia` of just created instance.
+- Use `inertia: Float` of instance to setup inertia of gestures.
+- You can switch off special orientation subview(compass view) with `isOrientationViewHidden: Bool` flag.
+- `Image360View` is controles with gestures and device motions by default. You can switch on this features via `isDeviceMotionControlEnabled` and `isGestureControlEnabled` flags.
+
  
 ### Example
  

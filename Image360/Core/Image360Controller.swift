@@ -125,7 +125,7 @@ public class Image360Controller: UIViewController {
     private var motionManager = CMMotionManager()
     
     private func enableDeviceMotionControl() {
-        motionManager.deviceMotionUpdateInterval = 0.1
+        motionManager.deviceMotionUpdateInterval = 0.07
         let queue = OperationQueue()
         motionManager.startDeviceMotionUpdates(to: queue, withHandler: deviceDidMove)
     }
