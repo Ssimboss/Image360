@@ -201,10 +201,24 @@
                                     <action selector="isDeviceMotionControlEnabledSwitchedWithSender:" destination="85w-Ka-FdT" eventType="touchUpInside" id="vhS-4A-SEv"/>
                                 </connections>
                             </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="isGestureControlEnabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsS-7K-jas">
+                                <rect key="frame" x="15" y="346" width="191" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O7a-IQ-AIC">
+                                <rect key="frame" x="311" y="341" width="51" height="31"/>
+                                <connections>
+                                    <action selector="isGestureControlEnabledSwitchedWithSender:" destination="85w-Ka-FdT" eventType="valueChanged" id="lHV-cY-zyc"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="3AO-d9-PII" secondAttribute="trailing" constant="15" id="02s-0K-07X"/>
+                            <constraint firstItem="QsS-7K-jas" firstAttribute="top" secondItem="2vb-fO-8kw" secondAttribute="bottom" constant="15" id="8ww-az-GF8"/>
+                            <constraint firstAttribute="trailing" secondItem="O7a-IQ-AIC" secondAttribute="trailing" constant="15" id="BmF-7p-njH"/>
                             <constraint firstItem="Vte-kh-sGa" firstAttribute="top" secondItem="oWN-bv-PPg" secondAttribute="bottom" constant="8" id="C4Z-ax-7FM"/>
                             <constraint firstItem="TNT-fq-ATj" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="COK-PJ-Gm2"/>
                             <constraint firstItem="SRE-XU-C6M" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="Il1-v4-lde"/>
@@ -212,10 +226,12 @@
                             <constraint firstItem="SRE-XU-C6M" firstAttribute="top" secondItem="TNT-fq-ATj" secondAttribute="bottom" constant="8" id="IyN-6X-7T8"/>
                             <constraint firstItem="oWN-bv-PPg" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="JTV-5z-MrF"/>
                             <constraint firstAttribute="trailing" secondItem="VXe-al-3SO" secondAttribute="trailing" constant="15" id="JxG-Ik-pXq"/>
+                            <constraint firstItem="O7a-IQ-AIC" firstAttribute="centerY" secondItem="QsS-7K-jas" secondAttribute="centerY" id="Lju-Le-t6J"/>
                             <constraint firstItem="Vte-kh-sGa" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="PR9-k2-Dyc"/>
                             <constraint firstItem="6Fq-2D-1dT" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="T8g-6C-sbu"/>
                             <constraint firstItem="HP9-ey-gzb" firstAttribute="top" secondItem="1dI-PS-myh" secondAttribute="bottom" constant="15" id="Tha-se-1Pg"/>
                             <constraint firstItem="UCd-rl-JRQ" firstAttribute="centerY" secondItem="2vb-fO-8kw" secondAttribute="centerY" id="VEc-Uf-35I"/>
+                            <constraint firstItem="QsS-7K-jas" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="Xeq-gh-nOm"/>
                             <constraint firstItem="HP9-ey-gzb" firstAttribute="leading" secondItem="iSj-WF-740" secondAttribute="leading" constant="15" id="Xky-K8-AEu"/>
                             <constraint firstItem="6Fq-2D-1dT" firstAttribute="top" secondItem="SRE-XU-C6M" secondAttribute="bottom" constant="15" id="Z2x-sU-spW"/>
                             <constraint firstItem="2vb-fO-8kw" firstAttribute="top" secondItem="Vte-kh-sGa" secondAttribute="bottom" constant="8" id="aAo-fj-YCv"/>
@@ -240,6 +256,7 @@
                     <connections>
                         <outlet property="inertiaSegmentedControl" destination="VXe-al-3SO" id="sM3-Fq-GU6"/>
                         <outlet property="isDeviceMotionControlEnabledSwitch" destination="UCd-rl-JRQ" id="ahR-f0-iMB"/>
+                        <outlet property="isGestureControlEnabledSwitch" destination="O7a-IQ-AIC" id="Ps5-SE-apV"/>
                         <outlet property="isOrientationViewHiddenSwitch" destination="3AO-d9-PII" id="Rgo-vq-lU0"/>
                         <outlet property="pictureSegmentedControl" destination="SRE-XU-C6M" id="rqI-DP-u12"/>
                         <outlet property="saveButton" destination="xct-j8-a1z" id="HxL-4R-P7d"/>

@@ -92,6 +92,20 @@ public class Image360Controller: UIViewController {
         }
     }
     
+    /// If this flag is `true` then `ImageView360`-orientation could be controled with gestures.
+    public var isGestureControlEnabled: Bool {
+        didSet {
+            guard oldValue != isGestureControlEnabled else {
+                return
+            }
+            if isGestureControlEnabled {
+                registerGestureRecognizers()
+            } else {
+                removeGestureRecognizers()
+            }
+        }
+    }
+    
     /// MARK: Motion Management
     private var motionManager = CMMotionManager()
     
@@ -113,6 +127,7 @@ public class Image360Controller: UIViewController {
         orientationView.tintColor = .white
         self.orientationView = orientationView
         isDeviceMotionControlEnabled = motionManager.isDeviceMotionAvailable
+        isGestureControlEnabled = true
         super.init(coder: aDecoder)
         registerGestureRecognizers()
         imageView.touchesHandler = self
@@ -173,26 +188,39 @@ public class Image360Controller: UIViewController {
     }
 
     // MARK: Gestures
-    private var panGestureRecognizer: UIPanGestureRecognizer!
-    private var pinchGestureRecognizer: UIPinchGestureRecognizer!
+    private var panGestureRecognizer: UIPanGestureRecognizer?
+    private var pinchGestureRecognizer: UIPinchGestureRecognizer?
 
     fileprivate var isPanning = false
     private var panPrev: CGPoint?
     private var panLastDiffX: CGFloat?
     private var panLastDiffY: CGFloat?
 
-    /// Gesture registration method
+    /// Creates gesture recognazer instances.
     private func registerGestureRecognizers() {
-        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler(recognizer:)))
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler(recognizer:)))
         panGestureRecognizer.maximumNumberOfTouches = 1
         panGestureRecognizer.delegate = self
         imageView.addGestureRecognizer(panGestureRecognizer)
+        self.panGestureRecognizer = panGestureRecognizer
 
-        pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchGestureHandler(recognizer:)))
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchGestureHandler(recognizer:)))
         pinchGestureRecognizer.delegate = self
         imageView.addGestureRecognizer(pinchGestureRecognizer)
+        self.pinchGestureRecognizer = pinchGestureRecognizer
     }
-
+    
+    /// Remove gesture recognazer instances.
+    private func removeGestureRecognizers() {
+        if let panGestureRecognizer = panGestureRecognizer {
+            imageView.removeGestureRecognizer(panGestureRecognizer)
+        }
+        if let pinchGestureRecognizer = pinchGestureRecognizer {
+            imageView.removeGestureRecognizer(pinchGestureRecognizer)
+        }
+        panGestureRecognizer = nil
+        pinchGestureRecognizer = nil
+    }
 
     /// Pinch operation compatibility handler
     /// - parameter recognizer: Recognizer object for gesture operations

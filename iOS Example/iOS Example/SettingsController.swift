@@ -31,6 +31,7 @@ class SettingsController: UIViewController {
     @IBOutlet var pictureSegmentedControl: UISegmentedControl!
     @IBOutlet var isOrientationViewHiddenSwitch: UISwitch!
     @IBOutlet var isDeviceMotionControlEnabledSwitch: UISwitch!
+    @IBOutlet var isGestureControlEnabledSwitch: UISwitch!
 
     @IBOutlet var saveButton: UIBarButtonItem!
 
@@ -38,11 +39,13 @@ class SettingsController: UIViewController {
     var pictureIndex: Int = 0
     var isOrientationViewHidden: Bool = false
     var isDeviceMotionControlEnabled: Bool = false
+    var isGestureControlEnabled: Bool = false
 
     private var initInertia: Inertia!
     private var initPictureIndex: Int!
     private var initIsOrientationViewHidden: Bool!
     private var initIsDeviceMotionControlEnabled: Bool!
+    private var initIsGestureControlEnabled: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,11 +60,13 @@ class SettingsController: UIViewController {
         }
         isOrientationViewHiddenSwitch.isOn = isOrientationViewHidden
         isDeviceMotionControlEnabledSwitch.isOn = isDeviceMotionControlEnabled
+        isGestureControlEnabledSwitch.isOn = isGestureControlEnabled
 
         initInertia = inertia
         initPictureIndex = pictureIndex
         initIsOrientationViewHidden = isOrientationViewHidden
         initIsDeviceMotionControlEnabled = isDeviceMotionControlEnabled
+        initIsGestureControlEnabled = isGestureControlEnabled
         pictureSegmentedControl.selectedSegmentIndex = pictureIndex
     }
 
@@ -90,6 +95,11 @@ class SettingsController: UIViewController {
         isDeviceMotionControlEnabled = sender.isOn
         saveButton.isEnabled = valuesChanged
     }
+    
+    @IBAction func isGestureControlEnabledSwitched(sender: UISwitch) {
+        isGestureControlEnabled = sender.isOn
+        saveButton.isEnabled = valuesChanged
+    }
 
     private var valuesChanged: Bool {
         if inertia != initInertia {
@@ -99,6 +109,8 @@ class SettingsController: UIViewController {
         } else if initIsOrientationViewHidden != isOrientationViewHidden {
             return true
         } else if initIsDeviceMotionControlEnabled != isDeviceMotionControlEnabled {
+            return true
+        } else if initIsGestureControlEnabled != isGestureControlEnabled {
             return true
         } else {
             return false
