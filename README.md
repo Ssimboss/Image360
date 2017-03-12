@@ -4,6 +4,7 @@
 
 
 # What is this?
+ Test
 
 Image360 is a simple stack of Image360Controller + Image360View which allows you to display 360° panoramic images.
  
