@@ -39,10 +39,6 @@ public class Image360Controller: UIViewController {
 
     // MARK: Inertia
     private let inertiaInterval: TimeInterval = 0.020
-    /// Amount of movement parameter for inertia (weak)
-    private let weakIntertiaRatio: Float = 1.0
-    /// Amount of movement parameter for inertia (strong)
-    private let strongIntertiaRatio: Float = 10.0
 
     private var inertiaRatio: Float?
 
@@ -125,7 +121,7 @@ public class Image360Controller: UIViewController {
     private var motionManager = CMMotionManager()
     
     private func enableDeviceMotionControl() {
-        motionManager.deviceMotionUpdateInterval = 0.07
+        motionManager.deviceMotionUpdateInterval = 0.02
         let queue = OperationQueue()
         motionManager.startDeviceMotionUpdates(to: queue, withHandler: deviceDidMove)
     }
