@@ -82,20 +82,11 @@ class ViewController: UIViewController {
     }
 
     @IBAction func segmentChanged(sender: UISegmentedControl) {
-        let pictureURL: URL
-        switch sender.selectedSegmentIndex {
-        case 0:
-            pictureURL = picture1URL
-        case 1:
-            pictureURL = picture2URL
-        default:
-            assertionFailure("Unexpected selected segment index")
-            return
-        }
-
         do {
-            let data = try Data(contentsOf: pictureURL)
-            if let image = UIImage(data: data) {
+            // Testing URL
+            let url = URL(string: "https://d36tnp772eyphs.cloudfront.net/blogs/1/2006/11/360-panorama-matador-seo.jpg")!
+            let data = try Data.init(contentsOf: url)
+            if let image: UIImage = UIImage(data:data) {
                 self.image360Controller.image = image
             } else {
                 NSLog("liveView - frameData is not image")
