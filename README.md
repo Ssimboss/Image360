@@ -1,4 +1,4 @@
-[![Version](https://img.shields.io/github/tag/Ssimboss/Image360.svg?label=beta)](https://github.com/Ssimboss/Image360/tree/0.2.0)
+[![Version](https://img.shields.io/github/tag/Ssimboss/Image360.svg?label=beta)](https://github.com/Ssimboss/Image360/tree/0.2.1)
 [![CocoaPods Compatible](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg)](https://cocoapods.org/pods/Image360)
 [![CocoaPods license](https://img.shields.io/cocoapods/l/Image360.svg)](https://github.com/Ssimboss/Image360/blob/master/LICENSE)
 
@@ -59,7 +59,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-pod 'Image360', '~> 0.2.0'
+pod 'Image360', '~> 0.2.1'
 end
 ```
 
