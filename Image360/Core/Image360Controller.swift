@@ -332,6 +332,7 @@ public class Image360Controller: UIViewController {
     }
     
     private var _lastAttitude: CMAttitude?
+    private var _lastOrientation: UIInterfaceOrientation?
     /// Device Motion Updates Handler
     /// - parameter data: New data of device motion.
     /// - parameter error: Error catched by device.
@@ -339,16 +340,35 @@ public class Image360Controller: UIViewController {
         guard let data = data else {
             return
         }
-        guard let lastAttitude = _lastAttitude else {
+        let currentOrientation = UIApplication.shared.statusBarOrientation
+        guard let lastAttitude = _lastAttitude, let lastOrientation = _lastOrientation, currentOrientation == lastOrientation else {
             _lastAttitude = data.attitude
+            _lastOrientation = currentOrientation
             return
         }
         _lastAttitude = data.attitude.copy() as? CMAttitude
         
         data.attitude.multiply(byInverseOf: lastAttitude)
         
-        let diffXZ = -Float(data.attitude.roll)
-        let diffY = Float(data.attitude.pitch)
+        let diffXZ: Float
+        let diffY: Float
+        
+        switch lastOrientation {
+        case .portrait:
+            diffXZ = -Float(data.attitude.roll)
+            diffY = Float(data.attitude.pitch)
+        case .portraitUpsideDown:
+            diffXZ = Float(data.attitude.roll)
+            diffY = -Float(data.attitude.pitch)
+        case .landscapeLeft:
+            diffXZ = Float(data.attitude.pitch)
+            diffY = Float(data.attitude.roll)
+        case .landscapeRight:
+            diffXZ = -Float(data.attitude.pitch)
+            diffY = -Float(data.attitude.roll)
+        default:
+            return
+        }
         DispatchQueue.main.async { [weak self] in
             self?.rotate(diffx: diffXZ, diffy: diffY)
         }
