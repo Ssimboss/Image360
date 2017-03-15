@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.2.1
+ - Interface orientation changes nahled.
+
 ### version 0.2.0
  - FPS improved
  - Typos fixed
