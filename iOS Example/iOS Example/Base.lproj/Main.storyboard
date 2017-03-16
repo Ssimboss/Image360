@@ -19,12 +19,55 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="XYS-cV-kOs"/>
+                        <segue destination="mz9-bN-ojq" kind="relationship" relationship="rootViewController" id="CGu-Wa-3Nu"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wbi-YQ-9F9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-706" y="38"/>
+            <point key="canvasLocation" x="-1362" y="9"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="lQX-Nd-Z1F">
+            <objects>
+                <viewController id="mz9-bN-ojq" customClass="RootViewController" customModule="iOS_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VUV-Ge-dl7"/>
+                        <viewControllerLayoutGuide type="bottom" id="KYI-Ma-olv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Ud-YA-G26">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qno-7i-ZZi">
+                                <rect key="frame" x="172" y="318.5" width="30" height="30"/>
+                                <state key="normal" title="Go!"/>
+                                <connections>
+                                    <action selector="buttonTappedWithSender:" destination="mz9-bN-ojq" eventType="touchUpInside" id="BRI-y8-f8U"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="HYG-cI-W9l">
+                                <rect key="frame" x="221" y="324" width="20" height="20"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Qno-7i-ZZi" firstAttribute="centerX" secondItem="4Ud-YA-G26" secondAttribute="centerX" id="ja8-Q8-753"/>
+                            <constraint firstItem="Qno-7i-ZZi" firstAttribute="centerY" secondItem="4Ud-YA-G26" secondAttribute="centerY" id="kQf-JC-rmq"/>
+                            <constraint firstItem="HYG-cI-W9l" firstAttribute="leading" secondItem="Qno-7i-ZZi" secondAttribute="trailing" constant="19" id="ncH-3W-4PB"/>
+                            <constraint firstItem="HYG-cI-W9l" firstAttribute="centerY" secondItem="Qno-7i-ZZi" secondAttribute="centerY" id="ynb-cY-mdg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ny2-V6-uL4"/>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="HYG-cI-W9l" id="N4m-NZ-XPm"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="image360Present" id="EgD-nm-XbM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kXg-Qi-Q0r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-693" y="9"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -47,19 +90,6 @@
                                     <segue destination="iPG-5Z-Aol" kind="embed" identifier="image360" id="eYk-uY-RJV"/>
                                 </connections>
                             </containerView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="YC3-37-IGX">
-                                <rect key="frame" x="15" y="624" width="345" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="7qV-9q-RmY"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Picture 1"/>
-                                    <segment title="Picture 2"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="AWl-Xn-c0U"/>
-                                </connections>
-                            </segmentedControl>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fdc-QQ-pPR">
                                 <rect key="frame" x="13" y="469" width="349" height="31"/>
                                 <connections>
@@ -86,12 +116,9 @@
                             <constraint firstItem="CoF-Km-VaZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="AcX-xF-0lS"/>
                             <constraint firstAttribute="trailing" secondItem="rea-x1-3cz" secondAttribute="trailing" constant="15" id="FZ5-KI-RaE"/>
                             <constraint firstAttribute="trailing" secondItem="CoF-Km-VaZ" secondAttribute="trailing" constant="15" id="Kkk-W9-Zg8"/>
-                            <constraint firstAttribute="trailing" secondItem="YC3-37-IGX" secondAttribute="trailing" constant="15" id="KuJ-vA-WIZ"/>
                             <constraint firstItem="fdc-QQ-pPR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="a2t-Gz-zOf"/>
                             <constraint firstItem="rea-x1-3cz" firstAttribute="top" secondItem="CoF-Km-VaZ" secondAttribute="bottom" constant="8" id="bxZ-Sw-ahs"/>
                             <constraint firstItem="Yji-c7-R8Z" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="15" id="dt1-Do-MfQ"/>
-                            <constraint firstItem="YC3-37-IGX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="hFS-jH-FCe"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YC3-37-IGX" secondAttribute="bottom" constant="15" id="hKK-fR-Upr"/>
                             <constraint firstItem="fdc-QQ-pPR" firstAttribute="top" secondItem="Yji-c7-R8Z" secondAttribute="bottom" constant="15" id="jdk-au-k0a"/>
                             <constraint firstAttribute="trailing" secondItem="fdc-QQ-pPR" secondAttribute="trailing" constant="15" id="ocG-LV-ee8"/>
                             <constraint firstItem="Yji-c7-R8Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pmY-EF-dkr"/>
@@ -110,7 +137,6 @@
                         <outlet property="angleXZSlider" destination="fdc-QQ-pPR" id="Aa7-CX-ssl"/>
                         <outlet property="angleYSlider" destination="CoF-Km-VaZ" id="PET-oa-iWj"/>
                         <outlet property="fovSlider" destination="rea-x1-3cz" id="uBm-1d-SQS"/>
-                        <outlet property="pictureSegmentedControl" destination="YC3-37-IGX" id="Q0Z-7e-ysL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

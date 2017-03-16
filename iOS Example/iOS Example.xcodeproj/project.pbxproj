@@ -17,6 +17,7 @@
 		206EC8D11E227BCE00E25EBA /* Image360.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206EC8D01E2279CE00E25EBA /* Image360.framework */; };
 		207092411E360388006407FA /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207092401E360388006407FA /* SettingsController.swift */; };
 		4176D2341E7412F900BE4FC4 /* Image360.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 206EC8D01E2279CE00E25EBA /* Image360.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		41F991B81E7B004D00927EEE /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F991B71E7B004D00927EEE /* RootViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		20424EBE1E242AF2008CD371 /* picture2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = picture2.jpg; sourceTree = "<group>"; };
 		206EC8CB1E2279CE00E25EBA /* Image360.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Image360.xcodeproj; path = ../Image360.xcodeproj; sourceTree = "<group>"; };
 		207092401E360388006407FA /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		41F991B71E7B004D00927EEE /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,15 +98,16 @@
 		200F86B51E227891008DF555 /* iOS Example */ = {
 			isa = PBXGroup;
 			children = (
+				200F86B61E227891008DF555 /* AppDelegate.swift */,
+				200F86BD1E227891008DF555 /* Assets.xcassets */,
+				200F86C21E227891008DF555 /* Info.plist */,
+				200F86BF1E227891008DF555 /* LaunchScreen.storyboard */,
+				200F86BA1E227891008DF555 /* Main.storyboard */,
 				20424EBC1E242AEB008CD371 /* picture1.jpg */,
 				20424EBE1E242AF2008CD371 /* picture2.jpg */,
-				200F86B61E227891008DF555 /* AppDelegate.swift */,
+				41F991B71E7B004D00927EEE /* RootViewController.swift */,
 				207092401E360388006407FA /* SettingsController.swift */,
 				200F86B81E227891008DF555 /* ViewController.swift */,
-				200F86BA1E227891008DF555 /* Main.storyboard */,
-				200F86BD1E227891008DF555 /* Assets.xcassets */,
-				200F86BF1E227891008DF555 /* LaunchScreen.storyboard */,
-				200F86C21E227891008DF555 /* Info.plist */,
 			);
 			path = "iOS Example";
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			files = (
 				207092411E360388006407FA /* SettingsController.swift in Sources */,
 				200F86B91E227891008DF555 /* ViewController.swift in Sources */,
+				41F991B81E7B004D00927EEE /* RootViewController.swift in Sources */,
 				200F86B71E227891008DF555 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

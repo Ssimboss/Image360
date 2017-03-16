@@ -36,7 +36,7 @@ class ViewController: UIViewController {
 
     @IBOutlet var image360Controller: Image360Controller!
 
-    @IBOutlet var pictureSegmentedControl: UISegmentedControl!
+    var image: UIImage!
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
@@ -45,11 +45,11 @@ class ViewController: UIViewController {
                 if let destination = segue.destination as? Image360Controller {
                     self.image360Controller = destination
                     self.image360Controller.imageView.observer = self
+                    //self.image360Controller.image = image
                 }
             case "settings":
                 if let destination = segue.destination as? SettingsController {
                     destination.inertia = image360Controller.inertia
-                    destination.pictureIndex = pictureSegmentedControl.selectedSegmentIndex
                     destination.isOrientationViewHidden = image360Controller.isOrientationViewHidden
                     destination.isDeviceMotionControlEnabled = image360Controller.isDeviceMotionControlEnabled
                     destination.isGestureControlEnabled = image360Controller.isGestureControlEnabled
@@ -60,12 +60,18 @@ class ViewController: UIViewController {
         }
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        precondition(image != nil)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if pictureSegmentedControl.selectedSegmentIndex < 0 {
-            pictureSegmentedControl.selectedSegmentIndex = 0
-            segmentChanged(sender: pictureSegmentedControl)
-        }
+        loadImage()
+    }
+    
+    func loadImage(){
+        self.image360Controller.image = image
     }
 
     @IBAction func unwindToViewController(segue: UIStoryboardSegue) {
@@ -74,26 +80,9 @@ class ViewController: UIViewController {
             return
         }
         image360Controller.inertia = settingsController.inertia
-        pictureSegmentedControl.selectedSegmentIndex = settingsController.pictureIndex
         image360Controller.isOrientationViewHidden = settingsController.isOrientationViewHidden
         image360Controller.isDeviceMotionControlEnabled = settingsController.isDeviceMotionControlEnabled
         image360Controller.isGestureControlEnabled = settingsController.isGestureControlEnabled
-        segmentChanged(sender: pictureSegmentedControl)
-    }
-
-    @IBAction func segmentChanged(sender: UISegmentedControl) {
-        do {
-            // Testing URL
-            let url = URL(string: "https://d36tnp772eyphs.cloudfront.net/blogs/1/2006/11/360-panorama-matador-seo.jpg")!
-            let data = try Data.init(contentsOf: url)
-            if let image: UIImage = UIImage(data:data) {
-                self.image360Controller.image = image
-            } else {
-                NSLog("liveView - frameData is not image")
-            }
-        } catch  {
-
-        }
     }
 
     @IBAction func angleXZSliderChanged(sender: UISlider) {
