@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.2.2
+ - Support of multiple Image360Controllers one one screen implemented.
+
 ### version 0.2.1
  - Interface orientation changes handled.
 
