@@ -79,7 +79,7 @@ public class Image360View: GLKView {
     private var uModel: GLint!
     private var uTex: GLint!
 
-    private var textureInfo: [Int32: GLKTextureInfo]!
+    private var textureInfo: [GLenum: GLKTextureInfo]!
 
     // MARK: Camera
     private let cameraPosition = GLKVector3(v: (0.0, 0.0, 0.0))
@@ -171,6 +171,10 @@ public class Image360View: GLKView {
     
     weak var orientationView: OrientationView?
 
+    /// OpenGL Sources
+    private let leftTextureUnit = GLenum(GL_TEXTURE0)
+    private let rightTextureUnit = GLenum(GL_TEXTURE1)
+    
     // MARK: Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -207,8 +211,8 @@ public class Image360View: GLKView {
         let viewWidth = frame.size.width
         let viewHeight = frame.size.height
 
-        shaderProgram = loadProgram(vertexShaderSrc: Shader.vertexShader.sourceCode,
-                                    fragmentShaderSrc: Shader.fragmentShader.sourceCode)
+        shaderProgram = glCreateProgram(vertexShaderSrc: Shader.vertexShader.sourceCode,
+                                        fragmentShaderSrc: Shader.fragmentShader.sourceCode)
         useAndAttachLocation(program: shaderProgram)
 
         glClearColor(0.0, 0.0, 1.0, 0.0)
@@ -248,32 +252,10 @@ public class Image360View: GLKView {
                 fatalError("rightImageRef is nil")
             }
 
-            let leftTexture: GLKTextureInfo
-            do {
-                leftTexture = try GLKTextureLoader.texture(with: leftImageRef, options: nil)
-            } catch  {
-                fatalError("leftTexture generation failed")
-            }
-
-            let rightTexture: GLKTextureInfo
-            do {
-                rightTexture = try GLKTextureLoader.texture(with: rightImageRef, options: nil)
-            } catch {
-                fatalError("rightTexture generation failed")
-            }
-
-            textureInfo = [
-                GL_TEXTURE0 : leftTexture,
-                GL_TEXTURE1 : rightTexture
-            ]
-
-            for (key, value) in textureInfo {
-                glActiveTexture(GLenum(key))
-                glBindTexture(GLenum(GL_TEXTURE_2D), value.name)
-
-                glTexParameterf(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GLfloat(GL_NEAREST))
-                glTexParameterf(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GLfloat(GL_LINEAR))
-            }
+            EAGLContext.setCurrent(self.context)
+            
+            textureInfo = glLoadTextures([leftTextureUnit : leftImageRef,
+                                          rightTextureUnit : rightImageRef])
 
             self.yaw = 0.0 // Do we really need it here?
             self.roll = 0.0
@@ -285,7 +267,8 @@ public class Image360View: GLKView {
 
     /// Redraw method.
     public override func draw(_ rect: CGRect) {
-    //func draw() {
+        EAGLContext.setCurrent(self.context)
+        
         projectionMatrix = GLKMatrix4Identity
         lookAtMatrix = GLKMatrix4Identity
         modelMatrix = GLKMatrix4Identity
@@ -320,7 +303,9 @@ public class Image360View: GLKView {
         glCheckError("glUniform4fv projectionmatrix")
 
         for (index, sphere) in spheres.enumerated() {
-            glUniform1i(uTex, GLint(index))
+            let textureUnit: GLenum = (index == 0) ? leftTextureUnit : rightTextureUnit
+            glUniform1i(uTex, GLint(textureUnit - GLenum(GL_TEXTURE0)))
+            glCheckError("glUniform1i")
             if let sphere = sphere {
                 draw(sphere: sphere, position: aPosition, uvLocation: aUV)
             }
@@ -340,96 +325,6 @@ public class Image360View: GLKView {
 
     override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         touchesHandler?.image360View(self, touchesEnded: touches, with: event)
-    }
-
-    /// Creates OpenGL shader.
-    /// - parameter shaderType: Specifies the type of shader to be created. GL_VERTEX_SHADER or GL_FRAGMENT_SHADER.
-    /// - parameter source: Shader source code(GLSL).
-    private func createShader(shaderType: GLenum, source: String) -> GLuint {
-        let nsString = NSString(string: source)
-        var shaderStringUTF8: UnsafePointer<GLchar>? = nsString.utf8String
-        var shaderStringLength: GLint = GLint(Int32(source.utf8.count))
-        var compiled: GLint = 0
-
-        let shader = glCreateShader(shaderType) // Creates shader
-        guard shader != 0 else {
-            return 0
-        }
-
-        glShaderSource(shader, 1, &shaderStringUTF8, &shaderStringLength) // Replaces shader's source code
-        glCompileShader(shader) // Compiles shader's code
-        glGetShaderiv(shader, GLenum(GL_COMPILE_STATUS), &compiled) // Puts compile status to compiled
-
-        guard compiled == GL_TRUE else {
-            var infoLen: GLint = 0
-            glGetShaderiv(shader, GLenum(GL_INFO_LOG_LENGTH), &infoLen)
-
-            if infoLen > 1 {
-                var infoBuffer = [Int8](repeating: 0, count: Int(infoLen))
-                var realLength: GLsizei = 0
-                glGetShaderInfoLog(shader, GLsizei(infoLen), &realLength, &infoBuffer)
-                let errorDescription = String(cString: &infoBuffer)
-                print("Shader compile error: \(errorDescription)")
-            }
-
-            glDeleteShader(shader) // Delete created shader
-            return 0
-        }
-        return shader
-    }
-
-    /// Program creation function for OpenGL
-    /// - parameter vertexShaderSrc: Vertex shader source
-    /// - parameter fragmentShaderSrc: Fragment shader source
-    private func loadProgram(vertexShaderSrc: String, fragmentShaderSrc: String) -> GLuint {
-        // load the vertex shader
-        let vertexShader = createShader(shaderType: GLenum(GL_VERTEX_SHADER), source: vertexShaderSrc)
-        guard vertexShader != 0 else {
-            return 0
-        }
-        // load fragment shader
-        let fragmentShader = createShader(shaderType: GLenum(GL_FRAGMENT_SHADER), source: fragmentShaderSrc)
-        guard fragmentShader != 0 else {
-            glDeleteShader(vertexShader)
-            return 0
-        }
-        // create the program object
-        let program = glCreateProgram()
-        if program == 0 {
-            glDeleteShader(vertexShader)
-            glDeleteShader(fragmentShader)
-            return 0
-        }
-
-        glAttachShader(program, vertexShader)
-        glAttachShader(program, fragmentShader)
-
-        // link the program
-        glLinkProgram(program)
-
-        // check the link status
-        var linked: GLint = 0
-        glGetProgramiv(program, GLenum(GL_LINK_STATUS), &linked)
-
-        guard linked == GL_TRUE else {
-            var infoLength: GLint = 0
-            glGetProgramiv(program, GLenum(GL_INFO_LOG_LENGTH), &infoLength)
-
-            if infoLength > 1 {
-                var infoBuffer = [Int8](repeating: 0, count: Int(infoLength))
-                var realLength: GLsizei = 0
-                glGetProgramInfoLog(program, GLsizei(infoLength), &realLength, &infoBuffer)
-                let errorDescription = String(cString: &infoBuffer)
-                print("Linking program error: \(errorDescription)")
-            }
-            glDeleteProgram(program)
-            return 0
-        }
-
-        glDeleteShader(vertexShader)
-        glDeleteShader(fragmentShader)
-
-        return program
     }
 
     /// Program validation and various shader variable validation methods for OpenGL
@@ -453,34 +348,9 @@ public class Image360View: GLKView {
         glCheckError("glGetUniformLocation texture")
     }
 
-    /// OpenGL Method for error detection
-    /// - parameter msg: Output character string at detection
-    func glCheckError(_ msg: String) {
-        var error: GLenum = 0
-        let noError = GLenum(GL_NO_ERROR)
-        repeat{
-            error = glGetError()
-            if error != noError{
-                NSLog("Image360 OpenGL error: \(error) %@¥n", error, msg)
-            }
-        } while error != noError
-    }
-
     func unloadTextures() {
-        if let leftTexture  = textureInfo[GL_TEXTURE0]{
-            glActiveTexture(GLenum(GL_TEXTURE0))
-            glBindTexture(leftTexture.target, 0)
-            var textures = [leftTexture.name]
-            glDeleteTextures(1, &textures)
-        }
-
-        if let rightTexture  = textureInfo[GL_TEXTURE1]{
-            glActiveTexture(GLenum(GL_TEXTURE1))
-            glBindTexture(rightTexture.target, 0)
-            var textures = [rightTexture.name]
-            glDeleteTextures(1, &textures)
-        }
-        //context = nil
+        EAGLContext.setCurrent(self.context)
+        glUnloadTextures(textureInfo)
     }
 
     // MARK: Sphere
