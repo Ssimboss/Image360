@@ -47,15 +47,15 @@ class Sphere {
 
         for index in 0 ..< mDivide/2 {
 
-            altitude      = M_PI_2 - Double(index)   * (M_PI * 2 / Double(mDivide))
-            altitudeDelta = M_PI_2 - Double(index + 1) * (M_PI * 2 / Double(mDivide))
+            altitude      = Double.pi / 2 - Double(index)   * (Double.pi * 2 / Double(mDivide))
+            altitudeDelta = Double.pi / 2 - Double(index + 1) * (Double.pi * 2 / Double(mDivide))
 
             var vertices  = [GLfloat](repeating: 0, count: (mDivide + 1) * 6)
             var texCoords = [GLfloat](repeating: 0, count: (mDivide + 1) * 4)
 
             for j in 0 ... mDivide / 2 {
 
-                azimuth = rotate - Double(j) * (2 * M_PI / Double(mDivide))
+                azimuth = rotate - Double(j) * (2 * Double.pi / Double(mDivide))
 
                 // 1st point
                 vertices[j * 6 + 0] = (radius * cos(GLfloat(altitudeDelta)) * cos(GLfloat(azimuth))) // TODO: Types hell

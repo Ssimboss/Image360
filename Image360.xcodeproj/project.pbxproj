@@ -16,9 +16,10 @@
 		200F86A61E227760008DF555 /* Image360Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F86A51E227760008DF555 /* Image360Controller.swift */; };
 		20424EC11E243914008CD371 /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20424EC01E243914008CD371 /* Shader.swift */; };
 		410B983B1E6345A800FF5C5C /* OrientationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410B983A1E6345A800FF5C5C /* OrientationView.swift */; };
-		417DDB021E604D6E00375BF1 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 417DDB011E604D6E00375BF1 /* README.md */; };
-		417DDB041E604DB700375BF1 /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = 417DDB031E604DB700375BF1 /* CHANGELOG.md */; };
 		417DDB061E604DED00375BF1 /* Image360.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 417DDB051E604DED00375BF1 /* Image360.podspec */; };
+		41B183CF1E903F1E0021A36A /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B183CE1E903F1E0021A36A /* Controller.swift */; };
+		41B183D11E903F5C0021A36A /* MotionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B183D01E903F5C0021A36A /* MotionController.swift */; };
+		41B183D31E903F850021A36A /* GestureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B183D21E903F850021A36A /* GestureController.swift */; };
 		41CFDF6B1E8806C800A4C9F0 /* GLKUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CFDF6A1E8806C800A4C9F0 /* GLKUtils.swift */; };
 		41FAB87B1E6AFC06007FEFFA /* Image360GLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FAB87A1E6AFC06007FEFFA /* Image360GLController.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,9 @@
 		417DDB011E604D6E00375BF1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		417DDB031E604DB700375BF1 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = SOURCE_ROOT; };
 		417DDB051E604DED00375BF1 /* Image360.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Image360.podspec; sourceTree = SOURCE_ROOT; };
+		41B183CE1E903F1E0021A36A /* Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
+		41B183D01E903F5C0021A36A /* MotionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionController.swift; sourceTree = "<group>"; };
+		41B183D21E903F850021A36A /* GestureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureController.swift; sourceTree = "<group>"; };
 		41CFDF6A1E8806C800A4C9F0 /* GLKUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLKUtils.swift; sourceTree = "<group>"; };
 		41FAB87A1E6AFC06007FEFFA /* Image360GLController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image360GLController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,8 +123,19 @@
 				410B983A1E6345A800FF5C5C /* OrientationView.swift */,
 				20424EC01E243914008CD371 /* Shader.swift */,
 				200F86A11E22770D008DF555 /* Sphere.swift */,
+				41B183CD1E903ED40021A36A /* Controllers */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		41B183CD1E903ED40021A36A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				41B183CE1E903F1E0021A36A /* Controller.swift */,
+				41B183D21E903F850021A36A /* GestureController.swift */,
+				41B183D01E903F5C0021A36A /* MotionController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,12 +222,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41B183CF1E903F1E0021A36A /* Controller.swift in Sources */,
 				41CFDF6B1E8806C800A4C9F0 /* GLKUtils.swift in Sources */,
-				417DDB021E604D6E00375BF1 /* README.md in Sources */,
 				200F86A21E22770D008DF555 /* Sphere.swift in Sources */,
 				200F86A41E227739008DF555 /* Image360View.swift in Sources */,
+				41B183D11E903F5C0021A36A /* MotionController.swift in Sources */,
+				41B183D31E903F850021A36A /* GestureController.swift in Sources */,
 				200F86A61E227760008DF555 /* Image360Controller.swift in Sources */,
-				417DDB041E604DB700375BF1 /* CHANGELOG.md in Sources */,
 				41FAB87B1E6AFC06007FEFFA /* Image360GLController.swift in Sources */,
 				20424EC11E243914008CD371 /* Shader.swift in Sources */,
 				410B983B1E6345A800FF5C5C /* OrientationView.swift in Sources */,
