@@ -129,17 +129,17 @@ public class Image360View: GLKView {
     /// Could be ignored/changed in case it's out of range -π .. π
     public func setRotationAngleXZ(newValue: Float) {
         if newValue > rotationAngleXZMax {
-            rotationAngleXZ = fmod(newValue, 2 * Float(M_PI)) - 2 * Float(M_PI)
+            rotationAngleXZ = fmod(newValue, 2 * Float.pi) - 2 * Float.pi
         } else if newValue < rotationAngleXZMin {
-            rotationAngleXZ = fmod(newValue, 2 * Float(M_PI)) + 2 * Float(M_PI)
+            rotationAngleXZ = fmod(newValue, 2 * Float.pi) + 2 * Float.pi
         } else {
             rotationAngleXZ = newValue
         }
     }
     /// Minimum possible value of `rotationAngleXZ`
-    public let rotationAngleXZMax = Float(M_PI)
+    public let rotationAngleXZMax = Float.pi
     /// Maximum possible value of `rotationAngleXZ`
-    public let rotationAngleXZMin = -Float(M_PI)
+    public let rotationAngleXZMin = -Float.pi
 
     /// Rotation angle relative to Y-axis. Radians. Readonly.
     /// Use `setRotationAngleY(newValue:)` to change this value.
@@ -162,9 +162,9 @@ public class Image360View: GLKView {
         }
     }
     /// Minimum possible value of `rotationAngleY`
-    public let rotationAngleYMax = Float(M_PI_2) - 0.01 //0.01 to prevent screen drag
+    public let rotationAngleYMax = Float.pi / 2 - 0.01 //0.01 to prevent screen drag
     /// Maximum possible value of `rotationAngleY`
-    public let rotationAngleYMin = -Float(M_PI_2) + 0.01 //0.01 to prevent screen drag
+    public let rotationAngleYMin = -Float.pi / 2 + 0.01 //0.01 to prevent screen drag
 
     weak var touchesHandler: Image360ViewTouchesHandler?
     public weak var observer: Image360ViewObserver?
@@ -189,7 +189,7 @@ public class Image360View: GLKView {
         self.initOpenGLSettings()
 
         spheres[0] = Sphere(radius: shellRadius, divide: shellDivide, rotate: 0.0)
-        spheres[1] = Sphere(radius: shellRadius, divide: shellDivide, rotate: M_PI)
+        spheres[1] = Sphere(radius: shellRadius, divide: shellDivide, rotate: Double.pi)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -365,7 +365,7 @@ public class Image360View: GLKView {
             glVertexAttribPointer(position, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), 0, sphere.vertexArray[index])
             glVertexAttribPointer(uvLocation, 2, GLenum(GL_FLOAT), GLboolean(GL_FALSE), 0, sphere.texCoordsArray[index])
 
-            glDrawArrays(GLenum(GL_TRIANGLE_STRIP), 0, sphere.mDivide + 2)
+            glDrawArrays(GLenum(GL_TRIANGLE_STRIP), 0, GLsizei(sphere.mDivide) + 2)
         }
     }
 }

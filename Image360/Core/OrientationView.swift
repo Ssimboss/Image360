@@ -27,7 +27,7 @@ internal class OrientationView: UIView {
     }
     
     var orientationAngle: CGFloat = 0
-    var fieldOfView: CGFloat = CGFloat(M_PI_2)
+    var fieldOfView: CGFloat = CGFloat.pi / 2
     
     open override func draw(_ rect: CGRect) {
         if let context = UIGraphicsGetCurrentContext() {
@@ -54,8 +54,8 @@ internal class OrientationView: UIView {
                 
                 context.addArc(center: center,
                                radius: rect.width / 2 - lineWidth,
-                               startAngle: orientationAngle - CGFloat(M_PI_2) - fieldOfView / 2,
-                               endAngle: orientationAngle - CGFloat(M_PI_2) + fieldOfView / 2,
+                               startAngle: orientationAngle - CGFloat.pi / 2 - fieldOfView / 2,
+                               endAngle: orientationAngle - CGFloat.pi / 2 + fieldOfView / 2,
                                clockwise: false)
                 
                 context.addLines(between: [CGPoint(x: center.x - dotSize / 8, y: center.y - dotSize / 4),
@@ -77,7 +77,7 @@ extension OrientationView: Image360ViewObserver {
     public func image360View(_ view: Image360View, didRotateOverY rotationAngleY: Float) {
     }
     public func image360View(_ view: Image360View, didChangeFOV cameraFov: Float) {
-        fieldOfView = CGFloat(cameraFov / 180 * Float (M_PI))
+        fieldOfView = CGFloat(cameraFov / 180 * Float.pi)
         self.setNeedsDisplay()
     }
 }
