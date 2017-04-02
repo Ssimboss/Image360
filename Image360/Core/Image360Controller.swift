@@ -95,9 +95,11 @@ public class Image360Controller: UIViewController {
         }
     }
     
+    /// Controller which rotates & scales view by handling user's gestures.
     public var gestureController: Controller {
         didSet {
             gestureController.imageView = imageView
+            gestureController.inertia = inertia
         }
     }
     
@@ -116,9 +118,11 @@ public class Image360Controller: UIViewController {
         }
     }
     
+    /// Controller which rotates & scales view by handling device's motions.
     public var motionController: Controller {
         didSet {
             motionController.imageView = imageView
+            motionController.inertia = inertia
             if isAppear {
                 isMotionControllerEnabled = motionController.isEnabled
             }

@@ -1,5 +1,9 @@
 # Change Log
 
+### version 0.2.3
+ - XCode 8.3 updates & deprecations.
+ - Your custom gesture & motion controllers could be integrated to work with `Image360`. Now `Image360Controller` has settable `gestureController` & `motionController`. Both are instances of a very abstract protocol `Image360.Controller`.
+
 ### version 0.2.2
  - Support of multiple Image360Controllers one one screen implemented.
 
