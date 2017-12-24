@@ -115,7 +115,7 @@ final class GestureController: NSObject, Controller {
     
     /// Pinch operation compatibility handler
     /// - parameter recognizer: Recognizer object for gesture operations
-    func pinchGestureHandler(recognizer: UIPinchGestureRecognizer) {
+    @objc func pinchGestureHandler(recognizer: UIPinchGestureRecognizer) {
         switch recognizer.state {
         case .began:
             prevScale = 1.0
@@ -127,7 +127,7 @@ final class GestureController: NSObject, Controller {
     
     /// Pan operation compatibility handler
     /// - parameter recognizer: Recognizer object for gesture operations
-    func panGestureHandler(recognizer: UIPanGestureRecognizer) {
+    @objc func panGestureHandler(recognizer: UIPanGestureRecognizer) {
         let cur = recognizer.translation(in: imageView)
         
         switch recognizer.state {
@@ -159,7 +159,7 @@ final class GestureController: NSObject, Controller {
     
     /// Timer setting method
     /// - parameter timer: Setting target timer
-    func inertiaTimerHandler(timer: Timer) {
+    @objc func inertiaTimerHandler(timer: Timer) {
         var diffX: Float = 0
         var diffY: Float = 0
         
