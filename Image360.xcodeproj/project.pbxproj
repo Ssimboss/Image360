@@ -42,6 +42,7 @@
 		41B183CE1E903F1E0021A36A /* Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		41B183D01E903F5C0021A36A /* MotionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionController.swift; sourceTree = "<group>"; };
 		41B183D21E903F850021A36A /* GestureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureController.swift; sourceTree = "<group>"; };
+		41C3C9711FFE4D2000866154 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		41CFDF6A1E8806C800A4C9F0 /* GLKUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLKUtils.swift; sourceTree = "<group>"; };
 		41FAB87A1E6AFC06007FEFFA /* Image360GLController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image360GLController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +88,7 @@
 		200F86951E2275CF008DF555 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				41C3C9711FFE4D2000866154 /* .travis.yml */,
 				417DDB031E604DB700375BF1 /* CHANGELOG.md */,
 				200F868C1E227582008DF555 /* Image360.h */,
 				417DDB051E604DED00375BF1 /* Image360.podspec */,
