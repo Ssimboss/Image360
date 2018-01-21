@@ -1,4 +1,4 @@
-[![Version](https://img.shields.io/github/tag/Ssimboss/Image360.svg?label=beta)](https://github.com/Ssimboss/Image360/tree/1.0.0)
+[![Version](https://img.shields.io/github/tag/Ssimboss/Image360.svg?label=release)](https://github.com/Ssimboss/Image360/tree/1.0.0)
 [![CocoaPods Compatible](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg)](https://cocoapods.org/pods/Image360)
 [![CocoaPods license](https://img.shields.io/cocoapods/l/Image360.svg)](https://github.com/Ssimboss/Image360/blob/master/LICENSE)
 ![Travis CI](https://api.travis-ci.org/Ssimboss/Image360.svg?branch=master)
