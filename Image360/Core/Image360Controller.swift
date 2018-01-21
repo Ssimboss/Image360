@@ -128,6 +128,31 @@ public class Image360Controller: UIViewController {
             }
         }
     }
+    
+    public init() {
+        imageView = Image360View(frame: CGRect(x: 0, y: 0, width: 512, height: 512))
+        image360GLController = Image360GLController(imageView: imageView)
+        let orientationView = OrientationView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0))
+        orientationView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        orientationView.tintColor = .white
+        self.orientationView = orientationView
+        
+        motionController = MotionController()
+        motionController.imageView = imageView
+        isMotionControllerEnabled = motionController.isEnabled
+        
+        gestureController = GestureController()
+        gestureController.imageView = imageView
+        
+        super.init(nibName: nil, bundle: nil)
+        imageView.orientationView = orientationView
+        
+        inertia = 0.1
+        motionController.inertia = inertia
+        gestureController.inertia = inertia
+        
+        setBlackBackground()
+    }
 
     public required init?(coder aDecoder: NSCoder) {
         imageView = Image360View(frame: CGRect(x: 0, y: 0, width: 512, height: 512))

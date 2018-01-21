@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     @IBOutlet var angleYSlider: UISlider!
     @IBOutlet var fovSlider: UISlider!
 
-    @IBOutlet var image360Controller: Image360Controller!
+    private var image360Controller: Image360Controller!
 
     @IBOutlet var pictureSegmentedControl: UISegmentedControl!
 
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
             if let image = UIImage(data: data) {
                 self.image360Controller.image = image
             } else {
-                NSLog("liveView - frameData is not image")
+                NSLog("ViewController.segmentChanged - data is not an image")
             }
         } catch  {
 

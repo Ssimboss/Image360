@@ -1,4 +1,4 @@
-[![Version](https://img.shields.io/github/tag/Ssimboss/Image360.svg?label=beta)](https://github.com/Ssimboss/Image360/tree/0.2.4)
+[![Version](https://img.shields.io/github/tag/Ssimboss/Image360.svg?label=beta)](https://github.com/Ssimboss/Image360/tree/1.0.0)
 [![CocoaPods Compatible](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg)](https://cocoapods.org/pods/Image360)
 [![CocoaPods license](https://img.shields.io/cocoapods/l/Image360.svg)](https://github.com/Ssimboss/Image360/blob/master/LICENSE)
 ![Travis CI](https://api.travis-ci.org/Ssimboss/Image360.svg?branch=master)
@@ -30,7 +30,7 @@ Image360 is a simple stack of Image360Controller + Image360View which allows you
    switch identifier {
      case "image360":
        if let destination = segue.destination as? Image360Controller {
-         self.image360Controller.imageView.image = UIImage(named: "MyPanoramicImage")
+         destination.image = UIImage(named: "MyPanoramicImage")
        }
      default:
        ()
@@ -60,7 +60,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-pod 'Image360', '~> 0.2.4'
+pod 'Image360', '~> 1.0.0'
 end
 ```
 

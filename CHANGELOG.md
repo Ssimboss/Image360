@@ -1,5 +1,9 @@
 # Change Log
 
+### version 1.0.0
+- Simple `init()` constructor for `Image360Controller` implemented.
+- README, Log, Swift version fixes.
+
 ### version 0.2.4
 - XCode 9.2 updates
 - Swift updated to 4.0
