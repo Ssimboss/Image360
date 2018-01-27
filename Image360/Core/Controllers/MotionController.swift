@@ -79,36 +79,36 @@ final class MotionController: Controller {
         guard let data = data else {
             return
         }
-        let currentOrientation = UIApplication.shared.statusBarOrientation
-        guard let lastAttitude = _lastAttitude, let lastOrientation = _lastOrientation, currentOrientation == lastOrientation else {
-            _lastAttitude = data.attitude
-            _lastOrientation = currentOrientation
-            return
-        }
-        _lastAttitude = data.attitude.copy() as? CMAttitude
-        
-        data.attitude.multiply(byInverseOf: lastAttitude)
-        
-        let diffXZ: Float
-        let diffY: Float
-        
-        switch lastOrientation {
-        case .portrait:
-            diffXZ = -Float(data.attitude.roll)
-            diffY = Float(data.attitude.pitch)
-        case .portraitUpsideDown:
-            diffXZ = Float(data.attitude.roll)
-            diffY = -Float(data.attitude.pitch)
-        case .landscapeLeft:
-            diffXZ = Float(data.attitude.pitch)
-            diffY = Float(data.attitude.roll)
-        case .landscapeRight:
-            diffXZ = -Float(data.attitude.pitch)
-            diffY = -Float(data.attitude.roll)
-        default:
-            return
-        }
         DispatchQueue.main.async { [weak self] in
+            let currentOrientation = UIApplication.shared.statusBarOrientation
+            guard let lastAttitude = self?._lastAttitude, let lastOrientation = self?._lastOrientation, currentOrientation == lastOrientation else {
+                self?._lastAttitude = data.attitude
+                self?._lastOrientation = currentOrientation
+                return
+            }
+            self?._lastAttitude = data.attitude.copy() as? CMAttitude
+            
+            data.attitude.multiply(byInverseOf: lastAttitude)
+            
+            let diffXZ: Float
+            let diffY: Float
+            
+            switch lastOrientation {
+            case .portrait:
+                diffXZ = -Float(data.attitude.roll)
+                diffY = Float(data.attitude.pitch)
+            case .portraitUpsideDown:
+                diffXZ = Float(data.attitude.roll)
+                diffY = -Float(data.attitude.pitch)
+            case .landscapeLeft:
+                diffXZ = Float(data.attitude.pitch)
+                diffY = Float(data.attitude.roll)
+            case .landscapeRight:
+                diffXZ = -Float(data.attitude.pitch)
+                diffY = -Float(data.attitude.roll)
+            default:
+                return
+            }
             self?.rotate(diffx: diffXZ, diffy: diffY)
         }
     }

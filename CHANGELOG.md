@@ -1,5 +1,8 @@
 # Change Log
 
+### version 1.0.1
+- Bug fix: `MotionController` accesses UIApplication on main thread only.
+
 ### version 1.0.0
 - Simple `init()` constructor for `Image360Controller` implemented.
 - README, Log, Swift version fixes.
