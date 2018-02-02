@@ -54,7 +54,7 @@ public class Image360View: GLKView {
     private var spheres = [Sphere?].init(repeating: nil, count: 2)
 
     /// Spherical radius for photo attachment
-    private let shellRadius: Float = 2.0
+    private let shellRadius: GLfloat = 2.0
     /// Number of spherical polygon partitions for photo attachment
     private let shellDivide: Int = 48
 
@@ -179,7 +179,7 @@ public class Image360View: GLKView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        guard let context = EAGLContext(api: .openGLES2) else { // TODO: version 3 ?
+        guard let context = EAGLContext(api: .openGLES3) else {
             fatalError("OpenGL context can't be created")
         }
 
@@ -295,11 +295,11 @@ public class Image360View: GLKView {
         glEnableVertexAttribArray(aPosition)
         glEnableVertexAttribArray(aUV)
 
-        glUniformMatrix4fv(uModel, 1, GLboolean(GL_FALSE), &modelMatrix.m.0)
+        glUniformGLKMatrix4(uModel, GLboolean(GL_FALSE), &modelMatrix)
         glCheckError("glUniform4fv model")
-        glUniformMatrix4fv(uView, 1, GLboolean(GL_FALSE), &lookAtMatrix.m.0)
+        glUniformGLKMatrix4(uView, GLboolean(GL_FALSE), &lookAtMatrix)
         glCheckError("glUniform4fv viewmatrix")
-        glUniformMatrix4fv(uProjection, 1, GLboolean(GL_FALSE), &projectionMatrix.m.0)
+        glUniformGLKMatrix4(uProjection, GLboolean(GL_FALSE), &projectionMatrix)
         glCheckError("glUniform4fv projectionmatrix")
 
         for (index, sphere) in spheres.enumerated() {
@@ -333,7 +333,7 @@ public class Image360View: GLKView {
         glUseProgram(program)
         glCheckError("glUseProgram")
 
-        aPosition = GLuint(glGetAttribLocation(program, "aPosition"))//TODO: check pointers
+        aPosition = GLuint(glGetAttribLocation(program, "aPosition"))
         glCheckError("glGetAttribLocation position")
         aUV = GLuint(glGetAttribLocation(program, "aUV"))
         glCheckError("glGetAttribLocation uv")

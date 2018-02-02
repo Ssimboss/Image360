@@ -1,5 +1,8 @@
 # Change Log
 
+### version 1.1.0
+- Bug fix: Image360 now can be used in release(non-debug) mode... again.
+
 ### version 1.0.1
 - Bug fix: `MotionController` accesses UIApplication on main thread only.
 

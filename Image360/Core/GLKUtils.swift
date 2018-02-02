@@ -148,12 +148,14 @@ func glCreateProgram(vertexShaderSrc: String, fragmentShaderSrc: String) -> GLui
     // load the vertex shader
     let vertexShader = glCreateAndCompileShader(shaderType: GLenum(GL_VERTEX_SHADER), source: vertexShaderSrc)
     guard vertexShader != 0 else {
+        print("glCreateProgram error: vertexShader == 0")
         return 0
     }
     // load fragment shader
     let fragmentShader = glCreateAndCompileShader(shaderType: GLenum(GL_FRAGMENT_SHADER), source: fragmentShaderSrc)
     guard fragmentShader != 0 else {
         glDeleteShader(vertexShader)
+        print("glCreateProgram error: fragmentShader == 0")
         return 0
     }
     // create the program object
@@ -161,6 +163,7 @@ func glCreateProgram(vertexShaderSrc: String, fragmentShaderSrc: String) -> GLui
     if program == 0 {
         glDeleteShader(vertexShader)
         glDeleteShader(fragmentShader)
+        print("glCreateProgram error: program == 0")
         return 0
     }
     
@@ -186,6 +189,7 @@ func glCreateProgram(vertexShaderSrc: String, fragmentShaderSrc: String) -> GLui
             print("Linking program error: \(errorDescription)")
         }
         glDeleteProgram(program)
+        print("glCreateProgram error: linked != GL_TRUE")
         return 0
     }
     
@@ -193,4 +197,17 @@ func glCreateProgram(vertexShaderSrc: String, fragmentShaderSrc: String) -> GLui
     glDeleteShader(fragmentShader)
     
     return program
+}
+
+/// Modifies the value of a matrix uniform variable or a uniform variable array like `glUniformMatrix4fv`.
+/// - parameter location: Location of the uniform value to be modified.
+/// - parameter transpose: Whether to transpose the matrix as the values are loaded into the uniform variable. Must be GL_FALSE.
+/// - parameter matrix: Matrix that will be used to update the specified uniform variable.
+func glUniformGLKMatrix4(_ location: GLint, _ transpose: GLboolean, _ matrix: inout GLKMatrix4) {
+    let capacity = MemoryLayout.size(ofValue: matrix.m)/MemoryLayout.size(ofValue: matrix.m.0)
+    withUnsafePointer(to: &matrix.m) {
+        $0.withMemoryRebound(to: GLfloat.self, capacity: capacity) {
+            glUniformMatrix4fv(location, 1, transpose, $0)
+        }
+    }
 }
