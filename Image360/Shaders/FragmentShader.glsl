@@ -1,4 +1,7 @@
-//  Created by Andrew Simvolokov on 08/01/2017.
+//
+//  FragmentShader.glsl
+//  Image360
+//
 //  Copyright © 2017 Andrew Simvolokov. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy

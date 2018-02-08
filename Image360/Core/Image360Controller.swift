@@ -30,11 +30,13 @@ private let blackFileURL = Bundle(for: Image360Controller.self).url(forResource:
 /// This controller presentes a special view to dysplay 360° panoramic image.
 public class Image360Controller: UIViewController {
     /// Image 360 view which actually dysplays 360° panoramic image.
-    public var imageView: Image360View
+    public var imageView: Image360View {
+        return image360GLController.imageView
+    }
     /// Special OpenGL controller to ouput Image360View
-    private let image360GLController: Image360GLController
+    private let image360GLController: Image360GLController = Image360GLController()
     /// Displays current camera position.
-    private var orientationView: OrientationView
+    private var orientationView: OrientationView!
 
     // MARK: Inertia
 
@@ -96,7 +98,7 @@ public class Image360Controller: UIViewController {
     }
     
     /// Controller which rotates & scales view by handling user's gestures.
-    public var gestureController: Controller {
+    public var gestureController: Controller = GestureController() {
         didSet {
             gestureController.imageView = imageView
             gestureController.inertia = inertia
@@ -119,7 +121,7 @@ public class Image360Controller: UIViewController {
     }
     
     /// Controller which rotates & scales view by handling device's motions.
-    public var motionController: Controller {
+    public var motionController: Controller = MotionController() {
         didSet {
             motionController.imageView = imageView
             motionController.inertia = inertia
@@ -130,57 +132,37 @@ public class Image360Controller: UIViewController {
     }
     
     public init() {
-        imageView = Image360View(frame: CGRect(x: 0, y: 0, width: 512, height: 512))
-        image360GLController = Image360GLController(imageView: imageView)
-        let orientationView = OrientationView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0))
-        orientationView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
-        orientationView.tintColor = .white
-        self.orientationView = orientationView
-        
-        motionController = MotionController()
-        motionController.imageView = imageView
         isMotionControllerEnabled = motionController.isEnabled
         
-        gestureController = GestureController()
-        gestureController.imageView = imageView
-        
         super.init(nibName: nil, bundle: nil)
-        imageView.orientationView = orientationView
         
         inertia = 0.1
         motionController.inertia = inertia
         gestureController.inertia = inertia
-        
-        setBlackBackground()
     }
 
     public required init?(coder aDecoder: NSCoder) {
-        imageView = Image360View(frame: CGRect(x: 0, y: 0, width: 512, height: 512))
-        image360GLController = Image360GLController(imageView: imageView)
-        let orientationView = OrientationView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0))
-        orientationView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
-        orientationView.tintColor = .white
-        self.orientationView = orientationView
-        
-        motionController = MotionController()
-        motionController.imageView = imageView
         isMotionControllerEnabled = motionController.isEnabled
         
-        gestureController = GestureController()
-        gestureController.imageView = imageView
-        
         super.init(coder: aDecoder)
-        imageView.orientationView = orientationView
         
         inertia = 0.1
         motionController.inertia = inertia
         gestureController.inertia = inertia
-        
-        setBlackBackground()
     }
 
     public override func loadView() {
         super.loadView()
+        let orientationView = OrientationView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0))
+        orientationView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        orientationView.tintColor = .white
+        self.orientationView = orientationView
+        
+        motionController.imageView = imageView
+        gestureController.imageView = imageView
+        imageView.orientationView = orientationView
+        setBlackBackground()
+        
         addChildViewController(image360GLController)
         view.addSubview(imageView)
         image360GLController.view.frame = view.bounds
@@ -201,9 +183,7 @@ public class Image360Controller: UIViewController {
 
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let presentedImage = imageView.image {
-            imageView.image = presentedImage
-        }
+        imageView.loadTexturesIfNeeded()
     }
 
     public override func viewDidAppear(_ animated: Bool) {

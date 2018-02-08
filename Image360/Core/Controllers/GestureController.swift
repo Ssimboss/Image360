@@ -2,7 +2,6 @@
 //  GestureController.swift
 //  Image360
 //
-//  Created by Andrew Simvolokov on 01.04.17.
 //  Copyright © 2017 Andrew Simvolokov. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy

@@ -1,5 +1,8 @@
 # Change Log
 
+### versions 1.1.1
+- Initialization stack of `Image360View` & `Image360Contoller` optimized.
+
 ### version 1.1.0
 - Bug fix: Image360 now can be used in release(non-debug) mode... again.
 

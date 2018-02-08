@@ -2,9 +2,6 @@
 //  MotionController.swift
 //  Image360
 //
-//  Created by Andrew Simvolokov on 26.03.17.
-//  Copyright © 2017 Andrew Simvolokov. All rights reserved.
-//
 //  Copyright © 2017 Andrew Simvolokov. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
