@@ -1,6 +1,9 @@
 # Change Log
 
-### versions 1.1.1
+### version 1.1.2
+- XCode project's configuration updated.
+
+### version 1.1.1
 - Initialization stack of `Image360View` & `Image360Contoller` optimized.
 
 ### version 1.1.0
