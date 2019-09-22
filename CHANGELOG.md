@@ -1,5 +1,8 @@
 # Change Log
 
+### version 1.1.5
+- TravisCI configuration updated. XCode 11 & iOS 13.0 support enabled.
+
 ### version 1.1.4
 - Deprecated ".swift-version" file removed. Swift-Version is specified throw the ".podspec" file.
 
