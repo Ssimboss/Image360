@@ -185,17 +185,18 @@
 				TargetAttributes = {
 					200F86881E227581008DF555 = {
 						CreatedOnToolsVersion = 8.1;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 200F86831E227581008DF555 /* Build configuration list for PBXProject "Image360" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 200F867F1E227581008DF555;
 			productRefGroup = 200F868A1E227582008DF555 /* Products */;
@@ -377,7 +378,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -398,7 +399,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

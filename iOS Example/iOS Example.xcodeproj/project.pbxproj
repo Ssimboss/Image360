@@ -151,14 +151,14 @@
 				TargetAttributes = {
 					200F86B21E227891008DF555 = {
 						CreatedOnToolsVersion = 8.1;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 200F86AE1E227891008DF555 /* Build configuration list for PBXProject "iOS Example" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -368,7 +368,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AndrewSimvolokov.iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -383,7 +383,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AndrewSimvolokov.iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

@@ -1,5 +1,8 @@
 # Change Log
 
+### version 1.1.3
+- Swift 5.0 migration. XCode project's configuration updated.
+
 ### version 1.1.2
 - XCode project's configuration updated.
 

@@ -163,11 +163,11 @@ public class Image360Controller: UIViewController {
         imageView.orientationView = orientationView
         setBlackBackground()
         
-        addChildViewController(image360GLController)
+        addChild(image360GLController)
         view.addSubview(imageView)
         image360GLController.view.frame = view.bounds
         image360GLController.view.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        image360GLController.didMove(toParentViewController: self)
+        image360GLController.didMove(toParent: self)
         
         view.addSubview(orientationView)
         orientationView.frame = CGRect(origin: CGPoint(x: view.bounds.maxX - orientationView.frame.size.width - 8,
