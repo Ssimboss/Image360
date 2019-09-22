@@ -36,7 +36,6 @@
 		200F86A51E227760008DF555 /* Image360Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image360Controller.swift; sourceTree = "<group>"; };
 		20424EC01E243914008CD371 /* Shader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
 		410B983A1E6345A800FF5C5C /* OrientationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrientationView.swift; sourceTree = "<group>"; };
-		4146DC632014DD7900D60C14 /* .swift-version */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".swift-version"; sourceTree = SOURCE_ROOT; };
 		417DDB011E604D6E00375BF1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		417DDB031E604DB700375BF1 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = SOURCE_ROOT; };
 		417DDB051E604DED00375BF1 /* Image360.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Image360.podspec; sourceTree = SOURCE_ROOT; };
@@ -89,7 +88,6 @@
 		200F86951E2275CF008DF555 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4146DC632014DD7900D60C14 /* .swift-version */,
 				41C3C9711FFE4D2000866154 /* .travis.yml */,
 				417DDB031E604DB700375BF1 /* CHANGELOG.md */,
 				200F868C1E227582008DF555 /* Image360.h */,

@@ -1,5 +1,8 @@
 # Change Log
 
+### version 1.1.4
+- Deprecated ".swift-version" file removed. Swift-Version is specified throw the ".podspec" file.
+
 ### version 1.1.3
 - Swift 5.0 migration. XCode project's configuration updated.
 

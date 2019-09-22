@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Image360"
-  s.version      = "1.1.3"
+  s.version      = "1.1.4"
   s.summary      = "Special controls to display 360° panoramic images."
   s.homepage     = "https://github.com/Ssimboss/Image360"
   s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -12,5 +12,6 @@ Pod::Spec.new do |s|
   s.source_files  = "Image360/**/*.swift"
   s.resources = "Image360/Resources/*.jpg", "Image360/Shaders/*.glsl"
   s.frameworks = "UIKit", "GLKit"
+  s.swift_version = '5.0'
 
 end
